@@ -1,0 +1,6 @@
+name = Benchmark Code Payments
+description = Provides a payment method for using coupons or codes.
+package = Team Diagnostics
+dependencies[] = commerce
+dependencies[] = commerce_payment
+core = 7.x

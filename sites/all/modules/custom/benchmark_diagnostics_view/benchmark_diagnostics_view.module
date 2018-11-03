@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Benchmark Diagnostics View feature.
+ */
+
+include_once 'benchmark_diagnostics_view.features.inc';

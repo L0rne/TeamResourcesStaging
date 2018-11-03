@@ -1,0 +1,1238 @@
+
+
+div#zone-content.zone div.tabs {
+	display:none;
+}
+
+/*.admin-team-distribultion-list {
+	float:left;
+	width:45%;
+}
+
+.admin-communicate-with-team {	
+}*/
+
+h1#page-title.title {
+    border-bottom:none !important;
+}
+
+div#dashboard-accordion div.diagnostic-status {
+	height:100% !important;
+}
+
+body.node-type-team #region-content {
+	border-right: thin dotted rgba(180, 181, 168, 0.85);
+    clear: both;
+    float: left;
+    margin-right: 10px;
+    padding-right: 40px;
+    width: 56%;
+}
+
+div#zone-content.zone div#region-content.grid-6 div.region-inner a + div.element-invisible {
+	clip:rect(auto, auto, auto, auto) !important;
+	position:inherit !important;
+}
+
+body.node-type-team .region-sidebar-first {
+	display:none;
+}
+
+body.node-type-team .region-sidebar-second {
+	width:35%;
+	
+}
+
+body.node-type-team .region-sidebar-second div#dashboard-info-header {
+	background: none repeat scroll 0 0 #58809C;
+    border: thin solid #000000;
+    color: #FFFFFF;
+    display: block;
+    height: 3em;
+    margin: 10px 10px 10px 0;
+    width: 14em;
+	display:none;
+	
+}
+
+/*-240px -2px*/
+
+h3.team-sidebar-header-unused {
+	display:none;
+}
+
+#email-team-header {
+	padding: 0 0 0 0px;
+	margin: 0 3px 0px 0;
+	cursor: default;
+	border-top:thin dotted #666666;
+	/*background:url("../images/compose-btn-grey.png") no-repeat right top;*/
+}
+
+/*#email-team-header:hover {
+	padding: 0 0 0 10px;
+	margin: 0 3px 10px 0;
+	cursor: pointer;
+	border-top:thin dotted #449249;
+	background:url("../images/compose-btn-green.png") no-repeat right top;
+}*/
+
+
+
+#add-team-header {
+	padding: 0 0 0 0px;
+	margin: 0 0px 0px 0;
+	cursor:default;
+	border-top:thin dotted #666666;
+	/*background-image:url("../images/add-btn-grey.png");
+	background-position:right top;
+	background-repeat:no-repeat;*/
+}
+/*
+#add-team-header:hover {
+	padding: 0 0 0 10px;
+	margin: 0 3px 10px 0;
+	cursor: pointer;
+	border-top:thin dotted #46933b;
+	background-image:url("../images/add-btn-green.png");
+	background-position:right top;
+	background-repeat:no-repeat;
+}*/
+
+#block-team-diagnostics-distribution-list .content {
+	padding: 0 0px 0 0;
+	font-size:14px;
+	color:#000;
+}
+
+/*div#team-email-distribution-list.members-empty {
+	background: url("../images/NoTeamMessage.png") no-repeat scroll 0 0 #CACACA;
+    margin: auto;
+    padding: 39px 231px;
+} */
+
+#add-team-container {
+	border:none;
+	border-bottom:2px solid #969696;
+    background: none repeat scroll 0 0 transparent;
+    border-image: none;
+    border-radius: 0 0 0 0;
+    margin: 0 0 10px;
+	padding-bottom:15px;
+}
+
+div#team-email-distribution-list {
+	background-color: #EBEBEB;
+    border: thin solid #969696;
+    border-radius: 8px 8px 8px 8px;
+    padding: 10px;
+}
+
+div#team-node-team-count-label {
+	color: #4C748B;
+    font-family: 'Lato';
+    font-size: 18px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+div#team-email-distribution-list:before {
+	color: #666666;
+    content: "Current Distribution List:";
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    margin: -8px 0 5px -4px;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+/*#directions-header {
+  padding: 10px 0 0 10px;
+  cursor: pointer;
+    border: 1px solid #D3D3D3;
+    color: #555555;
+    font-weight:500;
+}*/
+
+#team-title-label {  
+    margin-top:51px;
+	
+}
+
+div#region-content h1#page-title div.team-node-title {
+	padding: 5px 20px 0 0;
+	margin: 0 0 0 0;
+	/*border-bottom:thin dotted #666666;*/
+	cursor:pointer;
+        background-image: url("../images/edit-btn-grey.png");
+        background-position: right top;
+        background-repeat: no-repeat;
+}
+
+
+body.node-type-team #block-system-main .content {
+    /*padding: 0 3px 0 0; */
+}
+.team-description-field>div.field-label {
+	font-size:13px;
+	padding:0 0 0 0;
+	margin:5px 0 0 0;
+	color:#000;
+    
+}
+
+div.team-node-body  {
+    padding: 5px 40px 0 0;
+    margin: 0 0 0 0;
+    border-top:thin dotted #666666;
+    background-image: url("../images/edit-btn-grey.png");
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
+div.team-node-body:hover  {
+    border-top:thin dotted #f80a17;
+    background-image: url("../images/edit-btn-red.png");
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
+#block-team-diagnostics-distribution-list.block h2, #block-team-diagnostics-send-email-to-team.block h2 {
+    color: #000000;
+    font-family: 'Lato';
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+#team-email-table thead {
+	background-color:#434e57 !important;
+	height:30px;
+}
+
+table#team-email-table tr {
+	padding: 10px 0 10px 0;
+	
+}
+
+table#team-email-table td a, a:active, a:visited {
+	color:#f80a17;
+	text-align:center;
+	
+}
+
+div.region-sidebar-second {
+	z-index:1000;
+}
+
+table#team-email-table {
+	border:none;
+	margin-left:5px;
+	maring-top:0px;
+	width:97%;
+	margin-bottom: 7px;
+}
+
+div#new-email-field {
+	float:left;
+	width:73%;
+	margin-right:8px;
+}
+
+input#edit-team-member-add-add-button.form-submit, input#edit-team-member-add-add-button--2.form-submit {
+	background: url("../images/AddTeamMembersButton.png") repeat scroll -2px -123px transparent;
+    border: medium none;
+    border-radius: 0 0 0 0;
+    color: #FFFFFF;
+    display: block;
+    font-family: 'Lato';
+    height: 116px;
+    margin: 30px 0 20px;
+    padding: 0;
+    text-indent: -4000px;
+    text-shadow: none;
+    text-transform: uppercase;
+    width: 116px;
+}
+
+input#edit-team-member-add-add-button.form-submit:hover {
+	background-position: -2px -5px;
+}
+
+table#team-email-table tr.even {
+	background-color:transparent;
+	border-bottom:thin dotted #666666;
+}
+
+table#team-email-table tr.odd, table#team-email-table tr.even {
+	background:none;
+	border-bottom:thin dotted #666666;
+}
+
+table#team-email-table tr.odd td, table#team-email-table tr.even td {
+	background:none;
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	height:25px;
+	padding-left:10px;
+}
+
+div#send-team-email-button input.form-submit {
+	background: url("../images/SendDiagnosticButton.png") no-repeat scroll -3px -122px transparent;
+    border: medium none;
+    border-radius: 0 0 0 0;
+    display: block;
+    float: right;
+    height: 115px;
+    margin: 10px 0 0;
+    padding: 0;
+    text-indent: -4000px;
+    width: 115px;
+}
+
+div#send-team-email-button input.form-submit:hover {
+	background: url("../images/SendDiagnosticButton.png") no-repeat -3px -4px transparent;
+}
+
+div#email-team-container div.container-inline-date {
+	background: none repeat scroll 0 0 #CCCCCC;
+    border: thin solid #666666;
+    border-radius: 5px 5px 5px 5px;
+    clear: none;
+    font-family: 'Lato';
+    margin: -5px 0 0;
+    padding: 29px 0 5px 84px;
+    width: 54%;
+}
+
+div.form-item-email-team-due-date label {
+	margin-bottom: 0;
+    margin-left: 11px;
+}
+
+div#edit-email-team-due-date {
+	padding:2px 10px 10px 10px;
+}
+
+div#email-team-container {
+	padding:0px 6px 0px 10px;
+}
+
+div#send-email-message div.description {
+	font-size:10px;
+	color:#444;
+}
+
+
+div#send-email-message div.description div#invitation-copy {
+	border-top: thin dotted #999999;
+    color: #000000;
+    font-size: 14px;
+    margin-top: 5px;
+    padding-top: 15px;
+}
+
+div#send-email-message div.description div#invitation-copy p {
+	font-size:14px;
+	color:#000;
+}
+
+div#send-email-message div.description div#invitation-copy ul {
+	margin-left:25px;
+}
+
+div#send-email-message div.description div#invitation-copy ul li {
+	font-family: 'Lato';
+    font-size: 14px;
+}
+
+div#send-email-message div.description div#invitation-copy h4 {
+	font-family: 'Lato';
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+div#send-email-message div.description div#invitation-copy h4.invitation-link {
+	color:#26AAE1;
+	padding-bottom:10px;
+	text-decoration:underline;
+}
+
+div#send-email-message div.description div#invitation-copy h5 {
+	font-family: 'Lato';
+    font-style: italic;
+    font-weight: 500;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+/* RIGHT SIDEBAR CONTENT */
+
+span.ui-icon {
+	display:none;
+}
+
+#dashboard-info-header {
+	background-color:#57636f;
+	color:#FFF;
+	background-image:none;
+	margin: 0 0 20px 0px;
+	padding: 10px 10px 10px 10px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	-moz-box-shadow: 1px 1px 3px #666;
+  	-webkit-box-shadow: 1px 1px 3px #666;
+	box-shadow: 1px 1px 3px #666;
+}
+
+#dashboard-info-header a {
+	color:#CCC;
+	}
+	
+#info-header-text {
+	float:left;
+	
+}
+
+#info-header-purchase {
+	display:none;
+}
+
+
+
+#dashboard-inner {
+	background-color: #314856;
+    border-radius: 5px 5px 5px 5px;
+	border:rgba(0,0,0,1) thin solid;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin: 70px 0 0 0px;
+    padding: 5px;
+}
+
+div#dashboard-accordion.ui-accordion h3.team-sidebar-header-thingy {
+	background: url("../images/DiagnosticAdminButton.png") no-repeat scroll center center transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: 'Lato';
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 10px 10px 0;
+    padding: 25px 10px 25px 16px;
+    position: relative;
+    text-transform: uppercase;
+    word-spacing: 2px;
+	z-index:50;
+	font-size:97%;
+}
+
+div#dashboard-accordion.ui-accordion h3.team-sidebar-header-thingy a {
+	color:#fff;
+	text-transform:none;
+}
+
+div#dashboard-accordion.ui-accordion h3.team-sidebar-header-thingy:hover {
+	background: url("../images/DiagnosticAdminButton-Over.png") no-repeat scroll center center transparent;	
+}
+
+div#team-diagnostic-dashboard-form div#dashboard-inner div#dashboard-accordion.ui-accordion div.diagnostic-status, div#team-diagnostic-dashboard-form div#dashboard-inner div#dashboard-accordion.ui-accordion div.ui-accordion-content, div#team-diagnostic-dashboard-form div#dashboard-inner div#dashboard-accordion.ui-accordion div.ui-helper-reset {
+	background:transparent;
+	background:#fff;
+	border:thin solid #fff;
+	border-top:thin solid #5CA5D3;
+	margin: -10px 20px 10px;
+	padding: 5px 5px 5px 5px;
+	
+}
+
+
+div#team-diagnostic-dashboard-form div#dashboard-inner div#dashboard-accordion.ui-accordion div.diagnostic-status p {
+	font-family: 'Lato';
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    margin: 5px 0 0 15px;
+}
+
+div#team-diagnostic-dashboard-form div#dashboard-inner div#diagnostic-directions { 
+	background:transparent;
+	background:#fff;
+	border-top:thin solid #fff;
+	margin: 0px 10px 10px 10px;
+	border-radius: 0 0 4px 4px;
+}
+
+div#team-diagnostic-dashboard-form div#dashboard-inner div#diagnostic-directions p {
+	line-height:13px;
+	margin: 5px 0 0 15px;
+	padding-right:10px;
+}
+
+#diagnostic-directions h5 {
+	font-size:16px;
+	margin: 5px 0 0 15px;
+	color:#36515E;
+}
+
+#diagnostic-directions h4 {
+	font-size:24px;
+	margin: 5px 0 0 15px;
+}
+
+div#team-diagnostic-dashboard-form div#dashboard-inner div#diagnostic-directions ul {
+	margin: 5px 25px 25px 35px;
+}
+
+div#team-diagnostic-dashboard-form div#dashboard-inner div#diagnostic-directions ul li {
+	list-style:url(../images/bullet-arrow.png) outside none;
+	margin: 0 0 5px 0;
+}
+
+.diagnostic-status h5 {
+	font-family: 'Lato';
+    font-size: 20px;
+    font-weight: 500;
+    margin: 15px 0 0 15px;
+}
+
+div.diagnostic-details span.percent-complete {
+	font-size:14px;
+	margin: 25px 0 0 0px;
+	padding-top:10px;
+	color:#59A0CD;
+}
+
+div.diagnostic-details span.percent-complete:after {
+	content:" Complete";
+}
+
+div.diagnostic-details span.progress-text {
+	font-size:14px;
+	margin: 25px 0 0 15px;
+	padding-top:10px;
+}
+
+div.chart-report-download div.not-started img.chart {
+	opacity:.5;
+}
+
+div.chart-report-download div.not-started:after {
+	color: #000;
+    content: "No surveys have been completed for this assessment.";
+    display: inline-block;
+    font-family: 'Lato';
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1em;
+    position: relative;
+    text-shadow: 0 1px 1px #838383;
+    top: -92px;
+    width: 120px;
+}
+
+div.chart-report-download div.not-started {
+	display:block;
+}
+
+div.progress-chart img {
+	margin: 10px auto;
+}
+
+
+/*h3#directions-header.team-sidebar-header-thingy {
+	background: url("../images/DirectionsAdminButton.png") no-repeat scroll center center transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: 'Lato';
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 10px 10px 0;
+    padding: 25px 10px 25px 16px;
+    position: relative;
+    text-transform: uppercase;
+    word-spacing: 2px;
+}*/
+
+h3#directions-header.team-sidebar-header-thingy {
+	display:none;
+}
+
+h3#directions-header.team-sidebar-header-thingy a {
+
+    color: #FFFFFF;
+}
+
+h3#directions-header.team-sidebar-header-thingy:hover, h3#directions-header.team-sidebar-header-thingy.ui-state-active {
+	background: url("../images/DirectionsAdminButton-Over.png") no-repeat scroll center center transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: 'Lato';
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 10px 10px 0;
+    padding: 25px 10px 25px 16px;
+    position: relative;
+    text-transform: uppercase;
+    word-spacing: 2px;
+}
+
+div#team-diagnostic-dashboard-form div#dashboard-inner div#diagnostic-directions.ui-helper-reset {
+	background: url("../images/DirectionsAdminButton.png") no-repeat scroll center center transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: 'Lato';
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 10px 10px 0;
+    padding: 25px 10px 25px 16px;
+    position: relative;
+    text-transform: uppercase;
+    word-spacing: 2px;
+}
+
+div#team-diagnostic-dashboard-form div#dashboard-inner div#diagnostic-directions.ui-helper-reset:hover {
+	background: url("../images/DirectionsAdminButton-Over.png") no-repeat scroll center center transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: 'Lato';
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 10px 10px 0;
+    padding: 25px 10px 25px 16px;
+    position: relative;
+    text-transform: uppercase;
+    word-spacing: 2px;
+}
+
+div#team-diagnostic-dashboard-form div#dashboard-inner div#diagnostic-directions.ui-helper-reset a {
+	color:#ffffff;
+	text-decoration:none;
+}
+
+div#dashboard-accordion.ui-accordion h3.team-sidebar-header-thingy.ui-state-active { 
+	background: url("../images/DiagnosticAdminButton-Over.png") no-repeat scroll center center transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: 'Lato';
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 10px 10px 0;
+    padding: 25px 10px 25px 16px;
+    position: relative;
+    text-transform: uppercase;
+    word-spacing: 2px;
+	z-index:50;
+	font-size:97%;
+}
+
+div#dashboard-accordion.ui-accordion h3.team-sidebar-header-thingy.ui-state-active a { 
+	text-transform:none;
+    color: #FFFFFF;
+}
+
+div#dashboard-accordion.ui-accordion h3.team-sidebar-header-thingy.ui-state-hover, div#dashboard-accordion.ui-accordion h3.team-sidebar-header-thingy.ui-state-focus { 
+	background: url("../images/DiagnosticAdminButton-Over.png") no-repeat scroll center center transparent;	
+}
+
+/*div.ui-accordion h3.team-sidebar-header-thingy span.ui-icon {
+	background-image:url("../images/diagnostic-icon.png");
+	left: 10px;
+    margin-top: 0px;
+    position: absolute;
+    top: 19px;
+	background-position:left top;
+	width:27px;
+	height:27px;
+	
+}
+*/
+/*div.ui-accordion h3.team-sidebar-header-thingy:hover span.ui-icon {
+	background-image:url("../images/diagnostic-icon-blue.png");
+	left: 10px;
+    margin-top: 0px;
+    position: absolute;
+    top: 19px;
+	background-position:left top;
+	width:27px;
+	height:27px;
+	
+}*/
+
+
+
+/*div#dashboard-accordion.ui-accordion h3.team-sidebar-header-thingy.ui-state-active span.ui-icon { 
+	background-image:url("../images/diagnostic-icon-blue.png");
+	left: 10px;
+    margin-top: 0px;
+    position: absolute;
+    top: 19px;
+	background-position:left top;
+	width:27px;
+	height:27px;
+}*/
+
+
+/*div#dashboard-inner h3#directions-header.team-sidebar-header-thingy span.ui-icon {
+	background-image:url("../images/directions-icon.png");
+	left: 12px;
+    margin-top: 0px;
+    position: absolute;
+    top: 17px;
+	background-position:left top;
+	width:27px;
+	height:27px;
+	
+}
+
+div#dashboard-inner h3#directions-header.team-sidebar-header-thingy:hover span.ui-icon {
+	background-image:url("../images/directions-icon-blue.png");
+	left: 12px;
+    margin-top: 0px;
+    position: absolute;
+    top: 17px;
+	background-position:left top;
+	width:27px;
+	height:27px;
+	
+}*/
+
+
+
+#dashboard-accordion p {
+	color:#000;
+	line-height:13px;
+	margin: 5px 0 15px 1px;
+}
+
+/*div#dashboard-accordion div.available-row h3 {
+	font-size:24px;
+	margin: 15px 0 0 15px;
+}
+
+div#dashboard-accordion div.available-row p {
+	line-height:13px;
+	margin: 5px 0 0 15px;
+	padding-right:10px;
+}
+
+div#dashboard-accordion span.apply-highlight {
+	color:#FF0000;
+	line-height:13px;
+	font-weight:bold;
+	font-size:11px;
+}
+
+div#dashboard-accordion div.available-row {
+	background:transparent;
+	background:#fff;
+	border-left:thin solid #000;
+	border-right:thin solid #000;  
+	border-bottom:medium solid #000;
+	margin: -2px 10px 10px 10px;
+	padding: 5px 5px 5px 5px;
+}
+
+div#dashboard-accordion div.available-row h4 {
+	font-size:16px;
+	margin: 15px 0 0 15px;
+}
+
+div.apply-diagnostic-yes {
+	margin-top:35px;
+	text-align:center;
+}
+
+div#dashboard-accordion div.available-row div.apply-diagnostic-yes a {
+	background:url(../images/begin-survey-btn-red.png) no-repeat;
+	padding:27px 114px 27px 114px;
+}
+
+div#dashboard-accordion div.available-row div.apply-diagnostic-yes:hover a {
+	background:url(../images/begin-survey-btn-green.png) no-repeat;
+	padding:27px 114px 27px 114px;
+}
+*/
+div.chart-report-download {
+	postion:relative;
+	text-align: center;
+}
+
+div.progress-chart {
+	float:none;
+}
+
+div.download-link {
+	bottom: 14%;
+    left: 30%;
+    position: absolute;
+    z-index: 100;
+	
+
+}
+
+h1, h2, h3, h4, h5, h6, p, a, li, {
+	font-family:'Lato';
+}
+
+div.field-name-body div.field-label {
+	color: #000000;
+    font-family: 'Lato';
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 20px 0 0;
+    padding: 0;
+	/*border-bottom: thin dotted #000;*/
+}
+
+body.node-type-team h1#page-title.title {
+    /*border-bottom: thin dotted #000000;*/
+    font-family: 'Lato','Trebuchet MS',Arial,Helvetica,sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 18px;
+    margin:0 0;
+}
+
+div.team-node-title {
+    background-image: url("../images/edit-btn-grey.png");
+    padding-right: 45px;
+    background-position: right top;
+    background-repeat: no-repeat;
+    border-top: thin dotted #666666;
+}
+
+div.team-node-title form input {
+    font-family: 'Lato','Trebuchet MS',Arial,Helvetica,sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 18px;
+    margin:0 0;
+	width:475px !important;
+}
+
+div.team-node-title form button {
+    font-family: 'Lato','Trebuchet MS',Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 18px;
+    margin:0 0;
+    text-transform: uppercase;
+	text-shadow:none;
+	border-radius:5px;
+	margin:10px 0 5px 5px;
+	display:inline-block;
+}
+
+div.team-node-title form textarea {
+    font-family: 'Lato','Trebuchet MS',Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 15px;
+    margin:0 0;
+    text-transform: uppercase;
+	width:475px !important;
+}
+
+div.team-node-body form button {
+    font-family: 'Lato','Trebuchet MS',Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 18px;
+    margin:0 0;
+    text-transform: uppercase;
+	text-shadow:none;
+	border-radius:5px;
+	margin:10px 0 5px 5px;
+	display:inline-block;
+}
+
+
+/* -------------------- DIRECTIONS OVERLAY ------------------------ */
+
+
+div#cboxOverlay {
+	opacity:.80 !important;
+}
+
+div#colorbox div#cboxWrapper {
+	background:transparent;
+	height:100%;
+	width:100%;
+}
+
+div#colorbox div#cboxWrapper div div#cboxContent {
+	background: url("../images/Directions-Main.png") no-repeat scroll center center transparent;
+    margin-left: 15px;
+    margin-top: 40px;
+}
+
+div#colorbox div#cboxWrapper div div#cboxContent div#cboxClose {
+	background: url("../images/DirectionsCloseButton.png") no-repeat scroll 0 0 transparent;
+    float: right !important;
+    height: 64px;
+    position: relative;
+    right: 70px;
+    top: -500px;
+    width: 341px;
+}
+
+div#colorbox div#cboxWrapper div div#cboxContent div#cboxClose:hover {
+	background:url(../images/DirectionsCloseButton-Over.png) no-repeat transparent;
+}
+
+div#cboxContent div#cboxLoadedContent div#cboxNode article#node-page-69.node header h2.node-title {
+	display:none;
+}
+
+div.directions-graphic {
+
+}
+
+div#team-name-inner-section, div#team-description-inner-section, div#team-send-mail-inner-section, div#team-distribution-inner-section {
+	background-color: #E1E1E1;
+    border-radius: 10px 10px 10px 10px;
+    margin-right: 34px;
+    padding: 10px 15px 10px 10px;
+	border: thin solid #ccc;
+	border: thin solid rgba(0,0,0,.25)
+}
+
+div#team-send-mail-inner-section {
+	padding-right:0px;
+}
+
+div#team-description-inner-section {
+    margin-right: 34px;
+}
+
+div#team-name-section, div#team-description-section, div#team-send-mail-section, div#team-distribution-section {
+	margin: 10px 0;
+}
+
+div#team-description-section {
+    margin-top:5px;
+}
+
+div#team-name-inner-section.team-section-inner div.field-label, div#team-description-inner-section div.field-label {
+	color: rgba(0, 0, 0, 0.5);
+    font-family: 'Lato';
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+div.team-title-description {
+	color: #678FA6;
+    font-family: 'Lato';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    padding-left: 3px;
+    padding-top: 2px;
+    text-transform: none;
+}
+
+/********************************
+ *	qTip Styles
+ ********************************/
+
+/*.ui-tooltip-rounded,
+.ui-tooltip-rounded .ui-tooltip-content,
+.ui-tooltip-rounded .ui-tooltip-titlebar,
+.ui-tooltip-tipsy,
+.ui-tooltip-tipsy .ui-tooltip-content,
+.ui-tooltip-youtube,
+.ui-tooltip-youtube .ui-tooltip-content{
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	background-color: rgba(247,148,29,.8);
+	border-color: #111111;
+	color: #ffffff;
+}*/
+
+.ui-tooltip-default .ui-tooltip-titlebar {
+	border-radius:10px 10px 0 0 !important;
+	border-top:rgba(0,0,0,1) thin solid !important;
+	border-right:rgba(0,0,0,1) thin solid !important;
+	border-left:rgba(0,0,0,1) thin solid !important;
+	color:#000 !important;
+	font-family:'Lato' !important;
+	font-weight:700 !important;
+	background-color:rgba(255,202,87,1);
+	opacity:1;
+	font-size:16px;
+	padding-bottom:0px;
+}
+
+.ui-tooltip-default .ui-tooltip-content {
+	border-radius:0 0 10px 10px !important;
+	border-bottom:rgba(0,0,0,1) thin solid !important;
+	border-right:rgba(0,0,0,1) thin solid !important;
+	border-left:rgba(0,0,0,1) thin solid !important;
+	color:#000 !important;
+	font-family:'Lato' !important;
+	font-weight:500 !important;
+	background-color:rgba(255,202,87,1);
+	opacity:1;
+	font-size:15px;
+}
+
+.ui-tooltip-content p {
+	color: #000;
+	font-family: 'Lato';
+	font-size: 14px;
+	font-weight:500;
+	margin-bottom:0px;
+	padding-bottom:0px;
+}
+ 
+div.team-qtip-defaults {
+	opacity:1 !important;
+}
+
+div#ui-tooltip-1.ui-tooltip {
+	top:286px !important;
+}
+
+div#ui-tooltip-0.ui-tooltip {
+}
+
+div#ui-tooltip-2.ui-tooltip {
+}
+
+div#ui-tooltip-3.ui-tooltip {
+}
+ 
+/*.ui-tooltip-rounded .ui-tooltip-titlebar,
+.ui-tooltip-tipsy .ui-tooltip-titlebar,
+.ui-tooltip-youtube .ui-tooltip-titlebar{
+	-moz-border-radius: 10px 10px 0 0;
+	-webkit-border-radius: 10px 10px 0 0;
+	border-radius: 10px 10px 0 0;
+	background-color:rgba(247,148,29,.8);
+	color:#000;
+}*/
+
+.team-qtip-defaults {
+	max-width: 600px;
+	width: 470px;
+	opacity: 0.8;
+}
+
+div.ui-tooltip div.ui-tooltip-tip canvas {
+	display:none !important;
+}
+
+div#ui-tooltip-0.ui-tooltip div.ui-tooltip-tip {
+	background: url("../images/overlay-pointer.png") no-repeat scroll left top transparent !important;
+    height: 24px !important;
+    width: 21px !important;
+	top:14px !important;
+}
+
+
+div#ui-tooltip-1.ui-tooltip div.ui-tooltip-tip {
+	background: url("../images/overlay-pointer.png") no-repeat scroll left top transparent !important;
+    height: 24px !important;
+    width: 21px !important;
+	top:8px !important;
+}
+
+div#ui-tooltip-2.ui-tooltip div.ui-tooltip-tip {
+	background: url("../images/overlay-pointer.png") no-repeat scroll left top transparent !important;
+    height: 24px !important;
+    width: 21px !important;
+	top:14px !important;
+}
+
+div#ui-tooltip-3.ui-tooltip div.ui-tooltip-tip {
+	background: url("../images/overlay-pointer.png") no-repeat scroll left top transparent !important;
+    height: 24px !important;
+    width: 21px !important;
+	top:14px !important;
+}
+
+
+.team-ui-step-1 {
+	height: 68px;
+}
+
+.team-ui-step-2 {
+	height: 92px;
+}
+
+.team-ui-step-3 {
+	height: 139px;
+}
+
+.team-ui-step-4 {
+	height: 100px;
+}
+
+.team-ui-step-5 {
+	height: 100px;
+}
+
+div#team-name-qtip {
+	
+}
+
+div#dashboard-inner div#dashboard-info-icon.team-section-info-icon {
+	display:none;
+}
+
+div.team-section-info-icon {
+	background: url("../images/StepButtons.png") no-repeat scroll -8px -9px transparent;
+    cursor: pointer;
+    display: block;
+    float: right;
+    margin-right: -27px;
+    padding: 29px;
+}
+
+div#team-name-info-icon {
+	background-position: -3px -2px;
+	
+}
+
+div#team-description-info-icon {
+	background-position: -63px -2px;
+}
+
+div#team-distribution-info-icon {
+	background-position: -122px -2px;
+}
+
+div#team-send-mail-info-icon {
+	background-position: -182px -2px;
+    display: block;
+    z-index: 1000;
+	
+}
+
+div#team-name-info-icon:hover {
+	background-position: 9px -722px;
+	width:250px;
+	height:32px;
+	margin-left:-281px;
+	position:relative;
+}
+
+div#team-description-info-icon:hover {
+	background-position: 9px -577px;
+	width:250px;
+	height:32px;
+	margin-left:-215px;
+	position:relative;
+}
+
+div#team-distribution-info-icon:hover {
+	background-position: 9px -432px;
+	width:250px;
+	height:79px;
+	margin-left:-215px;
+	position:relative;
+}
+
+div#team-send-mail-info-icon:hover {
+	background-position: 9px -287px;
+	width:250px;
+	height:79px;
+	margin-left:-215px;
+	position:relative;
+}
+
+div#team-name-info-icon:hover:after {
+	content:"Click Edit and customize your team name.";
+	padding:0 22px 5px 16px;
+	display:block;
+	margin-left:-2px;
+	margin-top:-13px;
+	width:200px;
+}
+
+div#team-description-info-icon:hover:after {
+	content:"Click Edit and provide a brief team description.";
+	padding:0 22px 5px 16px;
+	display:block;
+	margin-left:-2px;
+	margin-top:-12px;
+}
+
+div#team-distribution-info-icon:hover:after {
+	content:"Add your team's email addresses to the white field. When you are finished, click on the button below to finish adding team members.";
+	padding:0 22px 5px 16px;
+	display:block;
+	margin-left:-2px;
+	margin-top:-12px;
+}
+
+div#team-send-mail-info-icon:hover:after {
+	content:"Add an optional greeting to the diagnostic invitation shown in this step, then select the Send button to begin your survey.";
+	padding:0 32px 0px 22px;
+	display:block;
+	margin-left:-2px;
+	margin-top:-12px;
+}
+
+div#dashboard-info-icon.team-section-info-icon {
+	background-position: -241px -1px;
+    clear: both;
+    float: left;
+    margin-right: 0;
+    margin-top: 9px;
+}
+
+div#dashboard-info-icon.team-section-info-icon:hover {
+	background-position: -3px -186px;
+    height: 35px;
+    margin-left: 0;
+    width: 351px;
+}
+
+div#dashboard-info-icon.team-section-info-icon:hover:after {
+	content: "Your diagnostic report will become available when 75% of your team has completed the corresponding survey.";
+    display: block;
+    line-height: 15px;
+    margin-left: 21px;
+    margin-top: -25px;
+    padding: 0 0 5px 16px;
+    width: 253px;
+}
+
+/*div#team-name-info-icon:hover:after {
+	width:45px;
+	height:45px;
+	background:rgba(0,102,153,.75);
+	display:block;
+	content:"Add team member emails in the field provided, separating each email with a comma or placing each email address on a new line. When your finished adding team member emails, click the submit button provided at the bottom of the ADD TEAM MEMBERS field.";
+}*/
+
+div.team-section-info-icon.close {
+	background-position: 38px 101px;
+}
+
+div.team-section-info-icon.close:hover {
+	background-position: 38px 135px;
+}
+
+div.ui-tooltip {
+	display:none;
+}

@@ -1,0 +1,429 @@
+/* element.base-class element syntax */
+table.survey-header {
+    background-color: #6694B0;
+    font-family: CartoGothicPro-Bold;
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+table.survey-row {
+    background-color: #cccccc;
+    font-family: CartoGothicPro-Book;
+    font-size: 8pt;
+}
+
+table.survey-altrow {
+    background-color: #cccccc;
+    font-family: CartoGothicPro-Book;
+    font-size: 8pt;
+}
+
+
+table.survey-footer {
+    /*background-color: #6694B0;*/
+    font-family: CartoGothicPro-Book;
+    font-size: 10pt;
+}
+
+table {
+    border: solid 0px #DDF0FD;
+}
+
+
+
+th {
+    font-family: CartoGothicPro-Book;
+    background-color: #DDF0FD;
+    color: #000000;
+    font-size: 12pt;
+    padding: 5 5 5 5;
+}
+
+th:nth-child(1) {
+    color: #DDF0FD;
+}
+
+td {
+    font-family: CartoGothicPro-Book;
+    background-color: #F2F2F2;
+    padding: 3 5 3 5;
+}
+
+td:nth-child(odd) {
+    font-family: CartoGothicPro-Book;
+    background-color: #E7E7E8;
+    padding: 3 5 3 5;
+}
+
+.footer-row {
+    font-family: CartoGothicPro-Bold;
+    background-color: #ffffff;
+    font-weight: bold;
+    padding: 5 5 5 5;
+}
+
+/*.footer-row:nth-child(1), */
+th:last-child
+{
+    background-color: #B7E3FC;
+}
+
+/* Generic Report Styles */
+.bar:nth-child(1) { color: #848edb; opacity: .8; }
+.bar:nth-child(2) { color: #a684db; opacity: .8; }
+.bar:nth-child(3) { color: #db84b9; opacity: .8; }
+.bar:nth-child(4) { color: #db848e; opacity: .8; }
+.bar:nth-child(5) { color: #dba684; opacity: .8; }
+.bar:nth-child(6) { color: #dbd284; opacity: .8; }
+.bar:nth-child(7) { color: #b9db84; opacity: .8; }
+.bar:nth-child(8) { color: #8edb84; opacity: .8; }
+.bar:nth-child(9) { color: #84dba6; opacity: .8; }
+.bar:nth-child(10) { color: #dbd284; opacity: .8; }
+.bar:nth-child(11) { color: #ae9757; opacity: .8; }
+.bar:nth-child(12) { color: #e186a8; opacity: .8; }
+
+
+
+.highest {
+    background-color: #00ff00;
+    color: #0000ff;
+    font-family: CartoGothicPro-Bold;
+}
+.lowest {
+    background-color: #ff0000;
+    color: #ffffff;
+    font-family: CartoGothicPro-Bold;
+}
+
+.row-label {
+    background-color: #DDF0FD;
+    font-family: CartoGothicPro-Bold;
+    /* font-family: Miso-Bold; */
+}
+
+.row-summary {
+    background-color: #ffffff;
+    font-family: CartoGothicPro-Bold;
+}
+
+.survey-chart .canvas {
+    font-size: 16pt;
+}
+
+.simple-bar .canvas {
+    font-family: CartoGothicPro-Book;
+    font-size: 36;
+}
+
+.profile-comments {
+    margin-bottom: 25px;
+}
+
+.question-text {
+    font-family: CartoGothicPro-Book;
+    font-size: 14pt;
+}
+
+.mean-bar {
+    font-family: cartogothicpro-book;
+    font-size: 12pt;
+    color: #000000;
+    border-color: #5186a8;
+    background-color: #84b9db;
+    border-width: 1;
+    border-radius: 1;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    margin-left: 1px;
+    margin-bottom: 15px;
+    width: 373;
+    height: 10;
+}
+
+.mean-bar-category {
+    position:  absolute;
+    top: 8;
+    left: 410;
+}
+
+.bullet-point {
+    font-family: CartoGothicPro-Book;
+    font-size: 10pt;
+}
+
+
+/* affects all bar charts without a more specific CSS selector 
+.bar { opacity: .8; }
+.bar:nth-child(1) { color: #123abc; }
+.bar:nth-child(2) { color: #456def; }
+.bar:nth-child(3) { color: #789abc; }
+.bar:nth-child(4) { color: #012def; }
+.bar:nth-child(5) { color: #345abc; }
+.bar:nth-child(6) { color: #678def; }
+*/
+
+/* Survey Styles */
+
+#footer-page-num {
+    font-size: 8px;
+    color: #6d6e71;
+    text-align: right;
+    vertical-align: top;
+}
+
+.survey {
+    font-family: cartogothicpro-book;
+}
+
+#overview-barchart .graph-area { padding: 10 10 30 150; }
+.survey-chart .graph-area { padding: 10 10 30 50; }
+
+#overview-barchart .bar:nth-child(1) { color: #0023ab; opacity: .4; }
+#overview-barchart .bar:nth-child(2) { color: #a223ef; opacity: .5; }
+#overview-barchart .bar:nth-child(3) { color: #fe45ac; opacity: .6; }
+#overview-barchart .bar:nth-child(4) { color: #21fe45; opacity: .7; }
+#overview-barchart .bar:nth-child(5) { color: #a127ce; opacity: .8; }
+#overview-barchart .bar:nth-child(6) { color: #6792ff; opacity: .9; }
+
+
+
+/* block class syntax */
+.survey-table {
+    font-size: 9pt;
+}
+
+
+/*  #block-id syntax */
+#willingness-questions-table {
+    border: solid 0px #000000;
+}
+#willingness-questions-table td:nth-child(1) { width: 7%; text-align: right; vertical-align: middle; }
+#willingness-questions-table td:nth-child(2) { width: 93%; }
+
+
+#willingness-response-table .row,
+#skill-response-table .row {
+    background-color: #cceecc;
+}
+
+#willingness-response-table .alt-row,
+#skill-response-table .alt-row {
+    background-color: #ccccee;
+}
+
+#profile-skill-will-scatter-team-avg-1 .graph-area,
+#profile-skill-will-scatter .graph-area {
+    padding: 54 45 22 31;
+}
+
+#profile-skill-will-scatter .canvas {
+    font-family: CartoGothicPro-Book;
+    font-size: 1pt;
+    color: #ffffff;
+    opacity: 0;
+}
+
+#profile-skill-will-scatter-team-avg-2 .graph-area {
+    padding: 34 47 32 33;
+}
+
+#profile-skill-will-scatter-team-avg .graph-area {
+    padding: 4 65 1 25;
+}
+
+#profile-skill-will-scatter-team-avg-2 .canvas
+#profile-skill-will-scatter-team-avg .canvas {
+    font-family: CartoGothicPro-Bold;
+    font-size: 1pt;
+    color: #ffffff;
+    opacity: 0;
+}
+
+
+#meeting-radar-chart .canvas {
+    font-family: CartoGothicPro-Bold;
+    font-size: 16pt;
+}
+
+
+#meeting-radar-chart .axis {
+    rotation: 30;
+    color: #00ff00;
+    font-size: 10pt;
+    background-image: url(circle);
+}
+
+
+#meeting-radar-chart .labels {
+    background-color: #00ffff;
+    opacity: .7;
+}
+
+#meeting-radar-chart .inner-bubble {
+    background-color: #12ab98;
+    opacity: .4;
+}
+
+
+#meeting-radar-chart .outer-bubble {
+    size: 10;
+    background-color: #4ed92c;
+    opacity: .5;
+}
+
+
+
+#meeting-radar-chart .values {
+    font-size: 8pt;
+    padding: 6;
+}
+
+
+.canvas {
+    font-family: helvetica;
+    font-size: 1pt;
+    color: #ffffff;
+}
+
+.axis {
+    rotation: 270;
+    color: #ff0000;  /*#9f8d83;*/
+    font-size: 2pt;
+    opacity: 0.0;
+    background-image: url(circle);
+}
+
+.labels {
+    background-color: #9f8d83;
+    opacity: 0.0;
+}
+
+.inner-bubble {
+    background-color: #ffffff;
+    opacity: 0.7;
+}
+
+.outer-bubble {
+    size: 7;
+    background-color: #ffffff;
+    opacity: 0.7;
+}
+
+.values {
+    font-size: 14pt;
+    padding: 4;
+}
+
+/* #team-communication .results-page-title, */
+.results-page-title {
+    font-family: helvetica;
+    font-size: 24pt;
+    color: #97A2B0;
+}
+
+#survey-radar .canvas {
+    color: #84be15;
+}
+
+#meetings-radar .axis {
+    rotation: 330;
+}
+
+/* Team Survey Styles */
+#common-purpose-response-table table {
+    border: solid 0px #DDF0FD;
+}
+
+#common-purpose-response-table th {
+    font-family: CartoGothicPro-Book;
+    background-color: #DDF0FD;
+    color: #000000;
+    font-size: 12pt;
+    padding: 5 5 5 5;
+}
+
+#common-purpose-response-table th:nth-child(1) {
+    color: #DDF0FD;
+}
+
+#common-purpose-response-table td:nth-child(odd) {
+    font-family: CartoGothicPro-Book;
+    background-color: #E7E7E8;
+    padding: 5 5 5 5;
+}
+
+#common-purpose-response-table th:last-child,
+#common-purpose-response-table .footer-row:nth-child(1) {
+    background-color: #B7E3FC;
+}
+
+#cover-team-name {
+  font-family: cartogothicpro-bold;
+  font-size: 14pt;
+}
+
+#survey-overview-table th:last-child,
+#meetings-worksheet-table th:last-child,
+#conflict-worksheet-table th:last-child,
+#communication-worksheet-table th:last-child {
+    background-color: #DDF0FD;
+}
+
+#conflict-team-cover {
+    color: #ffffff;
+}
+
+#skill-mean-summary,
+#willingness-mean-summary{
+    font-family: CartoGothicPro-Book;
+    font-size: 14pt;
+    color: #333333;
+}
+
+
+/*
+ * Use the following sample to extract specific style for specific tables
+ * by prefixing the style with the css-id.
+ * 
+table {
+    border: solid 1px #DDF0FD;
+}
+
+th {
+    font-family: CartoGothicPro-Book;
+    background-color: #DDF0FD;
+    color: #000000;
+    font-size: 12pt;
+    padding: 5 5 5 5;
+}
+
+th:nth-child(1) {
+    color: #DDF0FD;
+}
+
+th:last-child,
+.footer-row:nth-child(1) {
+    background-color: #B7E3FC;
+}
+
+td {
+    font-family: CartoGothicPro-Book;
+    background-color: #F2F2F2;
+    padding: 5 5 5 5;
+}
+
+td:nth-child(odd) {
+    font-family: CartoGothicPro-Book;
+    background-color: #E7E7E8;
+    padding: 5 5 5 5;
+}
+
+.footer-row {
+    font-family: CartoGothicPro-Bold;
+    background-color: #ffffff;
+    font-weight: bold;
+    padding: 5 5 5 5;
+}
+*/

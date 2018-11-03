@@ -1,0 +1,10 @@
+; $Id$
+name = Views jQFX: Imageflow
+description = Integrates the Imageflow plugin with Views jQfx.
+dependencies[] = views_jqfx
+package = Views
+core = 7.x
+files[] = views_jqfx_imageflow.module
+files[] = views_jqfx_imageflow.views_jqfx.inc
+files[] = theme/views_jqfx_imageflow.theme.inc
+

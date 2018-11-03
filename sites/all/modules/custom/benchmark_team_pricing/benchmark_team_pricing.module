@@ -1,0 +1,107 @@
+<?php
+/**
+ * 	This module enforces the business logic for the Triaxia Team Benchmark pricing model.
+ * 	It assumes the existence of 2 line item type fields:
+ * 	
+ *	- field_data_field_team_name
+ *	- field_data_field_team_size
+ *
+ *	configured at
+ *
+ *	admin/commerce/config/line-items/product/fields
+ *
+ *	These are drop down fields that appear on the Add to Cart form to select the generic team
+ *	name and team size for the diagnostic product purchased.
+ *
+ *	Once a team (e.g., "Team A") has been selected for a diagnostic product and put into the
+ *	commerce shopping cart with a specified number of team members, all subsequent line item
+ *	entries (diagnostic products) for that team must have the same team size. Also, you cannot
+ *	purchase the same diagnostic for the same team on a single order. It is assumed that the
+ *	team administrator will have the team complete a diagnostic before repeating it with the
+ *	same team and a separate purchase will be required to do so.
+ */
+
+/*
+ * This commerce hook proved worthles for the functionality, but I'm leaving it in the code for reference.
+ * 
+function benchmark_team_pricing_commerce_cart_product_add($order, $product, $quantity, $line_item) {
+  $args = array(
+    'order' => $order,
+    'product' => $product,
+    'quantity' => $quantity,
+    'line-item' => $line_item,
+  );
+  //die(var_dump($args));
+  $stop = $order;
+  //commerce_cart_product_add(0, array());
+}
+*/
+
+/**
+ *	implements hook_form_BASE_FORM_ID_alter()
+ *	for the commerce_cart_add_to_cart_form
+ */
+function benchmark_team_pricing_form_commerce_cart_add_to_cart_form_alter (&$form, &$form_state, $form_id) {
+  $form['#validate'][] = '_benchmark_team_pricing_consistent_team_size';
+}
+
+/**
+ *	Validation function to enforce the business logic of team size and pricing.
+ */
+function _benchmark_team_pricing_consistent_team_size(&$form, &$form_state) {
+  global $user;
+  $order_id = commerce_cart_order_id($user->uid);
+  $previous_cart_items = _benchmark_team_pricing_get_line_items_with_fields($order_id);
+  
+  $current_team_name = $form_state['values']['line_item_fields']['field_team_name']['und'][0]['value'];
+  $current_team_size = $form_state['values']['line_item_fields']['field_team_size']['und'][0]['value'];
+  $current_product_sku = $form_state['line_item']->line_item_label; // product SKU
+  $current_product_name = $form_state['default_product']->title;
+  
+  foreach ($previous_cart_items as $item) {
+    $existing_team_name = $item->field_team_name_value;
+    $existing_team_size = $item->field_team_size_value;
+    $existing_product_sku = $item->line_item_label;
+    $existing_product_name = $item->product;
+    
+    if ($existing_team_name == $current_team_name) {
+      if ($current_team_size != $existing_team_size) {
+	form_set_error('field_team_size', "$existing_team_name has $existing_team_size members for the $existing_product_name diagnostic in the shopping cart. Either remove $existing_product_name for $existing_team_name in the shopping cart or change the <em>Team Size</em> on $current_product_name to $existing_team_size.");
+	
+	//$form_state['values']['line_item_fields']['field_team_size']['und'][0]['value'] = $existing_team_size;
+	//drupal_rebuild_form($form['#form_id'], &$form_state, $form); // this doesn't work. TODO: make it work!
+      }
+      
+      if ($current_product_sku == $existing_product_sku) {
+	form_set_error('field_team_name', "You have already selected $current_product_name for $current_team_name. If you would like to purchase this diagnostic for another team, please change the <em>Team Name</em> attribute.");
+      }
+    }
+  }
+  
+}
+
+/**
+ *	A helper function to retrieve existing line items in the commerce shopping cart.
+ */
+function _benchmark_team_pricing_get_line_items_with_fields($order_id) {
+  
+  $query = db_select('commerce_line_item', 'li');
+  $query->innerJoin('commerce_product', 'p', 'li.line_item_label = p.sku');
+  $query->innerJoin('field_data_field_team_size', 'ts', 'li.line_item_id = ts.entity_id');
+  $query->innerJoin('field_revision_field_team_name', 'tn', 'li.line_item_id = tn.entity_id');
+  // fields
+  $query->addField('li', 'order_id');
+  $query->addField('li', 'line_item_id');
+  $query->addField('li', 'line_item_label');
+  $query->addField('p', 'title', 'product');
+  $query->addField('ts', 'field_team_size_value');
+  $query->addField('tn', 'field_team_name_value');
+  
+  $query->condition('li.order_id', $order_id, '=');
+  $query->orderBy('tn.field_team_name_value', 'ASC');
+  
+  $result = $query->execute();
+  
+  return $result->fetchAll();
+  //NOTE: fetchAllAssoc() returns an associate array instead of stdClass objects...if you prefer that kind of thing.
+}

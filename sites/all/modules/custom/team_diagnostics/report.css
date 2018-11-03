@@ -1,0 +1,270 @@
+p {
+    font-size: 11pt;
+    color: #000;
+	font-family: helvetica;
+}
+
+
+h1 {
+	font-size:26pt;
+	font-family: helvetica;
+	color:#68768C;
+	font-weight:normal;
+	letter-spacing:-1px;
+}
+
+h2 {
+	font-size:22pt;
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+}
+
+h3 {
+	font-size:18pt;
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+}
+
+h4 {
+	font-size:14pt;
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+}
+
+h5 {
+	font-size:12pt;
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+}
+
+h6 {
+	font-size:14pt;
+	font-family: helvetica;
+	color:#68768C;
+	border-top:1px solid #68768C;
+	font-weight:normal;
+	letter-spacing:0px;
+}
+
+
+ul li {
+	font-size:11pt;
+	line-height:1.5pt;
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	
+}
+
+div.item-list h3 {
+	font-size:14pt;
+	color:#333333;
+	font-family: helvetica;
+	border-bottom: 1px dashed #CCC;
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0pc;
+}
+
+blockquote {
+	border-top:1px solid #888;
+	border-bottom:1px solid #888;
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	
+}
+
+th {
+	
+}
+
+td {
+	
+}
+
+/* -------- */
+
+table.survey th {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+table.survey td {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+table.survey td.footer {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+/* -------- */
+
+table.profile th {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;	
+}
+
+table.profile td {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;	
+}
+
+table.profile td.footer {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+/* -------- */
+
+table.communication th {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+table.communication td {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+table.communication td.footer {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+/* -------- */
+
+table.meetings th {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+table.meetings td {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+table.meetings td.footer {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+/* -------- */
+
+table.conflict th {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+table.conflict td {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:9pt;
+}
+
+table.conflict td.footer {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:11pt;
+}
+
+/*  ratings fonts  */
+
+div.excellent {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:11pt;
+	color:#2294BC;
+}
+
+div.good {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:11pt;
+	color:#009342;
+}
+
+div.mundane {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:11pt;
+	color:#F7941E;
+}
+
+div.painful {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:11pt;
+	color:#F15A29;
+}
+
+div.dismal {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:11pt;
+	color:#BC0F24;
+}
+
+.highlight-box {
+	background-color:#F4E0CF;
+}
+
+h2.highlight-box-title {
+	font-family: helvetica;
+	font-weight:normal;
+	letter-spacing:0px;
+	font-size:22pt;
+	text-align:center;
+}
+
+table.meeting-problems-table {
+	width:300px;
+	text-align:center;
+}
+
+sup.registered-trademark {
+	font-size:10pt;
+}
+
+.page-background {
+    display: none;
+}

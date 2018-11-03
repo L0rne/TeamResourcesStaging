@@ -1,0 +1,405 @@
+#main-wrapper #main {
+	overflow:hidden;
+}
+
+.content-wrap {
+    overflow: visible;
+}
+
+.title {
+    display: block;
+	width:590px;
+}
+
+#breadcrumb {
+    display: block;
+}
+
+#sidebar-second {
+    margin-bottom: 50px;
+}
+
+/* #block-team-diagnostics-distribution-list.block h2 {color:#434e57;} */
+
+#team-title-label {
+    
+}
+
+div#page-title {
+	padding: 5px 0 0 0;
+	margin: 0 0 0 0;
+	border-top:thin dotted #666666;
+	cursor:pointer;
+        background-image: url("../images/edit-btn-grey.png");
+        background-position: right top;
+        background-repeat: no-repeat;
+}
+
+div#page-title:hover {
+	padding: 5px 0 0 0;
+	margin: 0 0 0 0;
+	border-top:thin dotted #f80a17;
+        background-image: url("../images/edit-btn-red.png");
+        background-position: right top;
+        background-repeat: no-repeat;
+}
+
+body.node-type-team #block-system-main .content {
+    padding: 0 3px 0 0;
+}
+.team-description-field>div.field-label {
+	font-size:13px;
+	padding:0 0 0 0;
+	margin:5px 0 0 0;
+	color:#000;
+    
+}
+
+div.team-node-body  {
+    padding: 5px 40px 0 0;
+    margin: 0 0 0 0;
+    border-top:thin dotted #666666;
+    background-image: url("../images/edit-btn-grey.png");
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
+div.team-node-body:hover  {
+    border-top:thin dotted #f80a17;
+    background-image: url("../images/edit-btn-red.png");
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
+#block-team-diagnostics-distribution-list.block h2, #block-team-diagnostics-send-email-to-team.block h2 {
+        padding: 0 0 0 0;
+        margin: 20px 0 0 0;
+		font-size:14px;
+		color:#000000;
+}
+
+#team-email-table thead {
+	background-color:#434e57 !important;
+	height:30px;
+}
+
+table#team-email-table tr {
+	padding: 10px 0 10px 0;
+	
+}
+
+table#team-email-table td a, a:active, a:visited {
+	color:#f80a17;
+	text-align:center;
+	
+}
+
+#directions-header, {
+  padding: 10px 0 0 10px;
+  cursor: pointer;
+    border: 1px solid #D3D3D3;
+    color: #555555;
+    font-weight: normal;
+}
+
+#email-team-header {
+	padding: 0 0 0 10px;
+	margin: 0 3px 10px 0;
+	cursor: pointer;
+	border-top:thin dotted #666666;
+	background:url("../images/compose-btn-grey.png") no-repeat right top;
+}
+
+#email-team-header:hover {
+	padding: 0 0 0 10px;
+	margin: 0 3px 10px 0;
+	cursor: pointer;
+	border-top:thin dotted #449249;
+	background:url("../images/compose-btn-green.png") no-repeat right top;
+}
+
+
+
+#add-team-header {
+	padding: 0 0 0 10px;
+	margin: 0 3px 10px 0;
+	cursor: pointer;
+	border-top:thin dotted #666666;
+	background-image:url("../images/add-btn-grey.png");
+	background-position:right top;
+	background-repeat:no-repeat;
+}
+
+#add-team-header:hover {
+	padding: 0 0 0 10px;
+	margin: 0 3px 10px 0;
+	cursor: pointer;
+	border-top:thin dotted #46933b;
+	background-image:url("../images/add-btn-green.png");
+	background-position:right top;
+	background-repeat:no-repeat;
+}
+
+#block-team-diagnostics-distribution-list .content {
+	padding: 0 15px 0 0;
+	font-size:14px;
+	color:#000;
+}
+
+#add-team-container {
+	margin: 0 0 10px 0;
+}
+
+
+/* h3#add-team-header  {
+	color:#000;
+	font-size:14px;
+	padding:5px 0 0 0;
+} */
+
+div.region-sidebar-second {
+	z-index:1000;
+}
+
+table#team-email-table {
+	
+}
+
+table#team-email-table tr.even {
+	background-color:transparent;
+	border-bottom:thin dotted #666666;
+}
+
+table#team-email-table tr.odd {
+	background-color:transparent;
+	border-bottom:thin dotted #666666;
+}
+
+/* RIGHT SIDEBAR CONTENT */
+
+#dashboard-info-header {
+	background-color:#57636f;
+	color:#FFF;
+	background-image:none;
+	margin: 0 0 20px 120px;
+	padding: 10px 10px 10px 10px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	-moz-box-shadow: 1px 1px 3px #666;
+  	-webkit-box-shadow: 1px 1px 3px #666;
+	box-shadow: 1px 1px 3px #666;
+}
+
+#dashboard-info-header a {
+	
+	}
+	
+#info-header-text {
+	float:left;
+	
+}
+
+#info-header-purchase {
+	margin: 10px 0 10px 10px;
+}
+
+#info-header-purchase-link {
+	background-image:url("../images/purchase-diagnostics-btn.png");
+	background-position:right;
+	background-repeat:no-repeat;
+	padding: 25px;
+	color:transparent;
+}
+
+#info-header-purchase-link:hover {
+	background-image:url("../images/purchase-diagnostics-btn-green.png");
+	background-position:right;
+	background-repeat:no-repeat;
+	padding: 25px;
+	color:transparent;
+}
+
+#info-unused-text {
+	margin-left:16px;
+}
+
+#info-header-unused-diagnostics {
+	 margin-top:4px;
+	 background: #59a0cd; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI0OSUiIHN0b3AtY29sb3I9IiM1OWEwY2QiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM0YThmYzEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #59a0cd 49%, #4a8fc1 50%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,#59a0cd), color-stop(50%,#4a8fc1)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #59a0cd 49%,#4a8fc1 50%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #59a0cd 49%,#4a8fc1 50%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #59a0cd 49%,#4a8fc1 50%); /* IE10+ */
+	background: linear-gradient(top, #59a0cd 49%,#4a8fc1 50%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#59a0cd', endColorstr='#4a8fc1',GradientType=0 ); /* IE6-8 */ 
+
+}
+
+#dashboard-inner {
+	padding: 5px 5px 5px 5px;
+	margin: 0 0 0 15px;
+	background-color:#66757E; 
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	-moz-box-shadow: 1px 1px 3px #666;
+  	-webkit-box-shadow: 1px 1px 3px #666;
+	box-shadow: 1px 1px 3px #666;
+}
+
+div#dashboard-accordion.ui-accordion h3.team-sidebar-header-thingy {
+	color:#fff;
+	background:transparent;
+	background: #434e57; 
+	/* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI0OSUiIHN0b3AtY29sb3I9IiM0MzRlNTciIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM1NjYwNjgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #434e57 49%, #566068 50%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,#434e57), color-stop(50%,#566068)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #434e57 49%,#566068 50%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #434e57 49%,#566068 50%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #434e57 49%,#566068 50%); /* IE10+ */
+	background: linear-gradient(top, #434e57 49%,#566068 50%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#434e57', endColorstr='#566068',GradientType=0 ); /* IE6-8 */
+	border:thin #000 solid;
+	padding-left:0px;
+	padding: 20px 10px 20px 40px;
+	cursor:pointer;
+	margin: 10px 10px 0px 10px;
+}
+
+div#dashboard-accordion.ui-accordion h3.team-sidebar-header-thingy:hover {
+	color:#5ea9d8;
+	background:transparent;
+	background: #434e57; 
+	/* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI0OSUiIHN0b3AtY29sb3I9IiM0MzRlNTciIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM1NjYwNjgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #434e57 49%, #566068 50%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,#434e57), color-stop(50%,#566068)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #434e57 49%,#566068 50%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #434e57 49%,#566068 50%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #434e57 49%,#566068 50%); /* IE10+ */
+	background: linear-gradient(top, #434e57 49%,#566068 50%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#434e57', endColorstr='#566068',GradientType=0 ); /* IE6-8 */
+	border:thin #5EA9D8 solid;
+	padding-left:0px;
+	padding: 20px 10px 20px 45px;
+	cursor:pointer;
+	margin: 10px 10px 0px 10px;
+}
+
+div.diagnostic-status {
+	background:transparent;
+	background:#fff;
+	border-top:medium solid #fff;
+	margin: 0px 10px 10px 10px;
+}
+
+#diagnostic-directions { 
+
+}
+
+h3#directions-header.team-sidebar-header-thingy {
+	color:#fff;
+	background:transparent;
+	background: #434e57; 
+	/* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI0OSUiIHN0b3AtY29sb3I9IiM0MzRlNTciIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM1NjYwNjgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #434e57 49%, #566068 50%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,#434e57), color-stop(50%,#566068)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #434e57 49%,#566068 50%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #434e57 49%,#566068 50%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #434e57 49%,#566068 50%); /* IE10+ */
+	background: linear-gradient(top, #434e57 49%,#566068 50%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#434e57', endColorstr='#566068',GradientType=0 ); /* IE6-8 */
+	
+	padding-left:0px;
+	padding: 20px 10px 20px 40px;
+	cursor:pointer;
+	margin: 10px 10px 0px 10px;
+	position:relative;
+}
+
+h3#directions-header.team-sidebar-header-thingy:hover {
+	color:#5ea9d8;
+	background:transparent;
+	background: #434e57; 
+	/* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI0OSUiIHN0b3AtY29sb3I9IiM0MzRlNTciIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM1NjYwNjgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #434e57 49%, #566068 50%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,#434e57), color-stop(50%,#566068)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #434e57 49%,#566068 50%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #434e57 49%,#566068 50%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #434e57 49%,#566068 50%); /* IE10+ */
+	background: linear-gradient(top, #434e57 49%,#566068 50%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#434e57', endColorstr='#566068',GradientType=0 ); /* IE6-8 */
+	border-color:#59A0CD !important;
+	padding-left:0px;
+	padding: 20px 10px 20px 45px;
+	cursor:pointer;
+	margin: 10px 10px 0px 10px;
+	position:relative;
+}
+
+div.ui-accordion h3.team-sidebar-header-thingy span.ui-icon {
+	background-image:url("../images/diagnostic-icon.png");
+	left: 10px;
+    margin-top: 0px;
+    position: absolute;
+    top: 19px;
+	background-position:left top;
+	width:27px;
+	height:27px;
+	
+}
+
+div.ui-accordion h3.team-sidebar-header-thingy:hover span.ui-icon {
+	background-image:url("../images/diagnostic-icon-blue.png");
+	left: 15px;
+    margin-top: 0px;
+    position: absolute;
+    top: 19px;
+	background-position:left top;
+	width:27px;
+	height:27px;
+	
+}
+
+div#dashboard-inner h3#directions-header.team-sidebar-header-thingy span.ui-icon {
+	background-image:url("../images/directions-icon.png");
+	left: 12px;
+    margin-top: 0px;
+    position: absolute;
+    top: 17px;
+	background-position:left top;
+	width:27px;
+	height:27px;
+	
+}
+
+div#dashboard-inner h3#directions-header.team-sidebar-header-thingy:hover span.ui-icon {
+	background-image:url("../images/directions-icon-blue.png");
+	left: 17px;
+    margin-top: 0px;
+    position: absolute;
+    top: 17px;
+	background-position:left top;
+	width:27px;
+	height:27px;
+	
+}
+
+#dashboard-accordion p {
+	color:#000;
+	line-height:12px;
+	margin: 5px 0 15px 1px;
+}
+
+div.qtip {
+	background-color:rgba(0,153,204,1);
+}

@@ -1,0 +1,101 @@
+.jeditable-textarea form {
+  width: 100%;
+  display: block;
+}
+
+.jeditable-textarea form textarea {
+  min-height: 40px;
+  min-width: 100% !important;
+  display: block;
+  font-size: 0.9em;
+  height: 80px;
+}
+
+h1#page-title, div#page-title div {
+  font-size:27px;
+  color:#434e57;
+  line-height:30px;
+  font-weight:bold;
+  padding-bottom:15px;
+}
+  
+body.node-type-team div.field-name-body.field-label-above div.field-label {
+  float: none;
+}
+  
+body.node-type-team div.field-name-body.field-label-above div.field-items div.field-item {
+  display: block; margin-left: 0px;
+}
+
+table#team-email-table {
+  /*border: solid 1px #000;*/
+  width: 460px;
+}
+
+
+table#team-email-table th {
+  font-size: 12pt;
+  font-weight: bold;
+  background-color: #434e57;
+  padding: 3px;
+  color:#FFFFFF
+}
+
+
+table#team-email-table td {
+  padding: 0 3px 1px 0;
+  font-size: 11px;
+  
+}
+
+table#team-email-table td.team-email {
+  width: 360px;
+}
+
+.ui-accordion .ui-accordion-header {
+    padding-left: 25px;
+}
+
+div.diagnostic-details, div.progress-chart {
+  float:left;
+}
+
+#dashboard-accordion li, #dashboard-accordion p {
+  font-size: 8pt;
+}
+
+#diagnostic-directions, #email-team-container, #add-team-container, #dashboard-info-header {
+  padding: 5px;
+}
+
+#diagnostic-directions ul li {
+  list-style: square;
+}
+
+#diagnostic-directions h5 {
+  margin: 5px 0px;
+}
+
+h3#directions-header {
+	display:none;
+}
+
+div#dashboard-accordion.ui-accordion h3.download-ready:after {
+	content:"Ready for print";
+	font-size:.7em;
+	color:#29E2A4;
+	display:block;
+}
+
+
+#block-team-diagnostics-send-email-to-team div.content {
+  padding: 0px 15px 0 0;
+}
+
+/*#directions_btn { width: 100px; }*/
+
+/* JS HELP SYSTEM */
+
+#team-distribution-help.help-window {
+	display:none;
+}

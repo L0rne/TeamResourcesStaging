@@ -1,0 +1,129 @@
+<?php
+/**
+ * @file
+ * Install hooks for uc_jqcalc7.module.
+ */
+
+/**
+ * Implementation of hook_schema().
+ */
+
+function uc_jqcalc7_schema() {
+  $schema = array();
+  
+  $schema['uc_jqcalc'] = array(
+    'fields' => array(
+      'qty_id' => array(
+        'description' => 'Unique identifier for product quantities.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'qty' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'qid' => array(
+        'type' => 'int',
+        'size' => 'small',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'dis' => array(
+        'type' => 'float',
+        'not null' => TRUE,
+        'default' => 0.00,
+      ),
+    ),
+      'primary key' => array('qty_id'),
+  );
+
+  $schema['uc_jqcalc_bypass'] = array(
+    'description' => 'Attributes that bypass an operation on the calculations.',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The product {node}.nid.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'aid' => array(
+        'description' => 'The {uc_attributes}.aid.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'bypass' => array(
+        'description' => "Flag that, if set, selects the attributes that bypass a calculation.",
+        'type' => 'int',
+        'size' => 'tiny',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'qty_multiplier' => array(
+        'type' => 'float',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+
+    ),
+    'primary key' => array('nid', 'aid'),
+  );  
+  
+  return $schema;
+}
+
+
+/**
+ * Implementation of hook install().
+ */
+function uc_jqcalc7_install() {
+  drupal_install_schema('uc_jqcalc');
+  db_query("UPDATE {system} SET weight = 10 WHERE name = 'uc_jqcalc'");
+}
+
+/**
+ * Implementation of hook uninstall().
+ */
+function uc_jqcalc7_uninstall() {
+  drupal_uninstall_schema('uc_jqcalc');
+  db_query("DELETE FROM {variable} WHERE name LIKE 'uc_jqcalc%'");
+}
+
+
+/**
+ * add fields to Ubercart tables.
+ */
+//function uc_jqcalc7_update_1() {
+//  $items = array();
+//  $items[] = update_sql("ALTER TABLE  {uc_attribute_options} ADD  `setup` DECIMAL( 16, 5 ) NOT NULL DEFAULT  '0.00000'");
+//  $items[] = update_sql("ALTER TABLE  {uc_product_options} ADD  `setup` DECIMAL( 16, 5 ) NOT NULL DEFAULT  '0.00000'");
+//	$items[] = update_sql("ALTER TABLE  {uc_class_attribute_options} ADD  `setup` DECIMAL( 16, 5 ) NOT NULL DEFAULT  '0.00000'");
+//  return $items;
+
+//}
+
+/**
+ * Delete {system} records for long-lost modules.
+ */
+function uc_jqcalc7_update_7100() {
+  $modules = array(
+    'content',
+  );
+  db_delete('system')
+    ->condition('name', $modules, 'IN')
+    ->condition('type', 'module')
+    ->execute();
+}

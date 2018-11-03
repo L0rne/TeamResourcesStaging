@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>http://teambenchmark.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+<url><loc>http://teambenchmark.com/frequently-asked-questions-faq</loc><changefreq>yearly</changefreq><priority>1.0</priority></url>
+<url><loc>http://teambenchmark.com/benchmark-process</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+<url><loc>http://teambenchmark.com/contact-us</loc><changefreq>yearly</changefreq><priority>1.0</priority></url>
+<url><loc>http://teambenchmark.com/online-team-assessments</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+<url><loc>http://teambenchmark.com/sites/teambenchmark/files/samples/Benchmark-Communication-Profile-Walkthrough-sm.pdf</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+<url><loc>http://teambenchmark.com/sites/teambenchmark/files/samples/Benchmark-Conflict-Profile-Walkthrough-sm.pdf</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+<url><loc>http://teambenchmark.com/sites/teambenchmark/files/samples/Benchmark-Meetings-Profile-Walkthrough-sm.pdf</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+<url><loc>http://teambenchmark.com/sites/teambenchmark/files/samples/Benchmark-Performance-Survey-Walkthrough-sm.pdf</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+<url><loc>http://teambenchmark.com/sites/teambenchmark/files/samples/Benchmark_Development_Survey_Walkthrough-sm.pdf</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+</urlset>

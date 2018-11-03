@@ -1,0 +1,5 @@
+.data-threshold-min,
+.data-threshold-max {
+    float: left;
+    width: 80px;
+}

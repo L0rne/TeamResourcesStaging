@@ -1,0 +1,73 @@
+
+body {
+/*	display:none;*/
+}
+
+div.cover-fan-1 img {
+	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    height: auto;
+    left: 0;
+    position: absolute;
+    top: -1em;
+    transform: rotate(-15deg);
+    width: 13em;
+	height:auto;
+}
+
+div.cover-fan-2 img {
+	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    height: auto;
+    left: 2.5em;
+    position: absolute;
+    top: 0em;
+    transform:none;
+    width: 13em;
+	height:auto;
+}
+
+div.cover-fan-3 img {
+	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    height: auto;
+    left: 1em;
+    position: absolute;
+    top: -6px;
+    transform:none;
+    width: 13em;
+	height:auto;
+}
+
+div.cover-fan-4 img {
+	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    height: auto;
+    left: 7.5em;
+    position: absolute;
+    top: 2em;
+    transform:none;
+    width: 13em;
+	height:auto;
+}
+
+div.cover-fan-5 img {
+	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    height: auto;
+    left: 10.25em;
+    position: absolute;
+    top: 3em;
+    transform:none;
+    width: 13em;
+	height:auto;
+}
+
+div.cover-fans {
+	float: right;
+    height: 15em;
+    margin-right: 12em;
+    margin-top: 3em;
+    position: relative;
+    width: 20em;
+}

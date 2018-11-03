@@ -1,0 +1,149 @@
+<?php
+
+/**
+ *  This module provides a 3-column data field table for Benchmark
+ *  reports using the Fields API. The field stores, for each report,
+ *  the data thresholds of the rating scale and the colors to be
+ *  associated with them.
+ *  
+ */
+
+function benchmark_color_threshold_field_info() {
+    
+    return array(
+        'benchmark_color_threshold' => array(
+          'label' => t('Data Color Threshold'),
+          'description' => t("This associates colors with data thresholds"),
+          'settings' => array('allowed_values' => array(), 'allowed_values_function' => ''),
+          'default_widget' => 'data_color_widget',
+          'default_formatter' => 'data_color_table',
+        ),
+    );
+}
+
+/**
+ *  implements hook_field_validate()
+ *
+ */
+function benchmark_color_threshold_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+    foreach ($items as $delta => $item) {
+        
+    }
+}
+
+/**
+ *  implements hook_field_is_empty()
+ *
+ */
+function benchmark_color_threshold_field_is_empty($item, $field) {
+    $temp = array_keys($field['columns']);
+    $key = array_shift($temp);
+    //$empty = empty($item[$key]);
+    return empty($item[$key]);
+}
+
+/**
+ *  implements hook_field_formatter_info()
+ *
+ *  This formatter is called 'data_color_table'
+ *  (the field)
+ *  
+ */
+function benchmark_color_threshold_field_formatter_info() {
+    return array(
+        'data_color_table' => array(
+            'label' => t('Data Color Thresholds'), 
+            'field types' => array('benchmark_color_threshold'),
+        ),
+    );
+}
+
+/**
+ *  implements hook_field_formatter_view()
+ *
+ */
+function benchmark_color_threshold_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+   
+    $element = array();   
+    $headers = array(
+        t('Minimum'),
+        t('Maximum'),
+        t('Color'),
+    );
+      
+    // Ditto from above...
+    // Normally, we would loop through the deltas and use those instead of $element[0]. But since
+    // we want a single themed table that contains all possible rows, this is good enough of a hack.
+    $element[0]['#markup'] = theme('table', array('header' => $headers, 'rows' => $items));
+    
+    return $element;
+}
+
+function benchmark_color_threshold_field_widget_info() {
+    return array(
+        'data_color_widget' => array(
+          'label' => t('Data Threshold Color'), 
+          'field types' => array('benchmark_color_threshold'),
+        ),
+    );
+}
+
+function benchmark_color_threshold_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+    
+    $min_value = isset($items[$delta]['min']) ? $items[$delta]['min'] : '';
+    $max_value = isset($items[$delta]['max']) ? $items[$delta]['max'] : '';
+    $color_value = isset($items[$delta]['color']) ? $items[$delta]['color'] : '#000000';
+    
+    $element += array('#delta' => $delta);
+    
+    drupal_add_css(drupal_get_path('module', 'benchmark_color_threshold') . '/data_colors.css');
+    
+    switch ($instance['widget']['type']) {
+        case 'data_color_widget':
+            
+            $element['min'] = array(
+                '#prefix' => '<div class="data-threshold-min"',
+                '#suffix' => '</div>',
+                '#attributes' => array('class' => array('edit-data-color-min'), 'title' => t('Minimum')),
+                '#type' => 'textfield',
+                '#size' => 5,
+                '#maxlength' => 5,
+                '#title' => t('Minimum'),
+                '#default_value' => $min_value,
+            );
+            
+            $element['max'] = array(
+                '#prefix' => '<div class="data-threshold-max"',
+                '#suffix' => '</div>',
+                '#attributes' => array('class' => array('edit-data-color-max'), 'title' => t('Maximum')),
+                '#type' => 'textfield',
+                '#size' => 5,
+                '#maxlength' => 5,
+                '#title' => t('Maximum'),
+                '#default_value' => $max_value,
+            );
+            
+            $element['color'] = array(
+                '#prefix' => '<div class="data-threshold-color"',
+                '#suffix' => '</div><div class="edit-data-color-colorpicker"></div>',
+                '#attributes' => array('class' => array('edit-data-color-color'), 'title' => t('Color')),
+                '#type' => 'textfield',
+                '#size' => 7,
+                '#maxlength' => 7,
+                '#title' => t('Color'),
+                '#attached' => array(
+                    // Add Farbtastic color picker.
+                    'library' => array(
+                      array('system', 'farbtastic'),
+                    ),
+                    // Add javascript to trigger the colorpicker.
+                    'js' => array(drupal_get_path('module', 'benchmark_color_threshold') . '/data_colors.js'),
+                ),
+                '#default_value' => $color_value,
+            );
+            
+            break;
+    }   
+    
+    return $element;
+}

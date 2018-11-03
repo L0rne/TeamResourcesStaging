@@ -1,0 +1,25 @@
+div.process-step h4 {
+  color: red;
+}
+
+body {
+    background: none repeat scroll 0 0 #FFFFFF;
+	background-image:none;
+}
+
+header#section-header.section {
+	background-color: #fff;
+    background-image: none;
+}
+
+div#zone-menu-wrapper.zone-wrapper, body.not-front div#zone-menu-wrapper.zone-wrapper {
+	background:none;
+}
+
+ul.thing-one li.diagnostics-row div.product-image a:after {
+	display:none;
+}
+
+div#benchmark-commerce-cart-block {
+	display:none;
+}

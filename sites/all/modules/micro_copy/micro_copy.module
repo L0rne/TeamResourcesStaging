@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Micro Copy feature.
+ */
+
+include_once('micro_copy.features.inc');

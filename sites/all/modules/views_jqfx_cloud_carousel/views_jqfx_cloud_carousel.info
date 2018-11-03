@@ -1,0 +1,10 @@
+; $Id$
+name = Views jQFX Cloud Carousel
+description = Integrates the Cloud Carousel plugin with Views jQFX.
+dependencies[] = views_jqfx
+package = Views
+core = 7.x
+files[] = views_jqfx_cloud_carousel.module
+files[] = views_jqfx_cloud_carousel.views_jqfx.inc
+files[] = theme/views_jqfx_cloud_carousel.theme.inc
+

@@ -1,0 +1,6 @@
+; $Id$
+name = pChart API
+description = Provides a programming interface to render pCharts. (Requires pChart library.)
+package = Charting
+core = 7.x
+version = "7.x-1.0-beta1"

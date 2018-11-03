@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Team Node feature.
+ */
+
+include_once('team_node.features.inc');

@@ -1,0 +1,32 @@
+/* $Id: views_jqfx_imageflow.css $ */
+
+.views_jqfx_imageflow_no_display,
+.views_jqfx_imageflow_hidden,
+.views_jqfx_imageflow_controls,
+.views_jqfx_imageflow_image_count {
+  display: none;
+}
+
+.views-jqfx-imageflow {
+  background-color: #000000;
+}
+
+/* Pager Settings */
+
+.views_jqfx_imageflow_pager div a img {
+  width: 75px;
+  height: 75px;
+}
+
+.views_jqfx_pager_numbered div, .views_jqfx_pager_thumbnails div {
+  display: inline;
+  padding-left: 10px;
+}
+
+.views_jqfx_imageflow_pager.thumbnails a.activeSlide img {
+  border: 3px solid #000;
+}
+
+.views_jqfx_imageflow_pager.numbered a.activeSlide {
+  text-decoration: underline;
+}

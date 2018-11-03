@@ -1,0 +1,777 @@
+<?php
+
+
+
+/**
+ * Additions to the Ubercart product display update, formerly uc_aac
+ * 
+ */
+
+function uc_jqcalc7_form_alter(&$form, &$form_state, $form_id) {
+	//dpm($form, $form_id . " from uc_jqcalc7_form_alter");
+
+
+	// Is this still doing anything?
+	if (isset($form_state['storage']['variant']->selected_qty_value)) {
+		$form_state['storage']['variant']->data['selected_qty_value'] = $form_state['storage']['variant']->selected_qty_value;
+	}
+	
+
+	// changes to the product add to cart form
+	if (strstr($form_id, 'uc_product_add_to_cart_form')) {
+
+		// move attributes down so Quantity is on top
+		$form['attributes']['#weight'] = 10;
+
+		// Grab the quantity options
+		if(!empty($form['node']['#value']->quantity)) {
+			if (!function_exists("mapCallback")) {
+						function mapCallback($item) {
+			      	return $item['qty'];
+			     	}
+			}
+
+			$quantities = array_map('mapCallback', $form['node']['#value']->quantity);
+			$qty_options = array();
+
+			$first = FALSE;
+			foreach ($quantities as $key => $value) {
+			    $qty_options[$value] = $value;
+			    if ($first === FALSE) {
+			    	$default = $value;
+			    	$first = TRUE;
+			    }
+			}
+
+			// Change default quantity field to a dropdown
+			$form['qty'] = array(
+				'#type' => 'select',
+				'#options' => $qty_options,
+				'#title' => t('Quantity'),
+				'#ajax' => array(
+					'callback' => 'uc_jqcalc7_qty_change_callback',
+					'wrapper' => '.display-price',
+					'method' => 'replace',
+					'effect' => 'fade',
+				),
+			);
+
+
+		}
+
+
+
+	}
+
+
+
+
+	// Form for adding quantities and discounts to a product
+	if ($form_id == 'product_node_form') { 
+		//dpm($form, $form_id);
+		//dpm($form_state, "form state for " . $form_id);
+
+		$node = $form["#node"];
+		//dpm($node, "node");
+		//$product = uc_product_load_variant($node->nid);
+		//dpm($product, "product");
+
+		$no_js_use = FALSE;
+
+		if (isset($node->quantity)) {
+			//dpm($node->quantity, "node->quantity");
+			$rows = count($node->quantity);
+		}
+		
+		// Fieldset for the Quantities / Discounts
+	    $form['base']['quantities'] = array(
+	      '#type' => 'fieldset',
+	      '#title' => t('Jquery Product Calculator - Quantities / Discount'),
+	      '#weight' => 50,
+	      '#collapsible' => FALSE,
+	      '#collapsed' => FALSE,
+	    );
+
+
+		$form['base']['quantities']['description'] = array(
+    '#markup' => '<div>' . t('Use this form to add quantities to be selected on the product page, as well as Discount values associated with the purchase of that quantity.')
+    . '</div>',
+		);
+
+		// Because we have many fields with the same values, we have to set
+		// #tree to be able to access them.
+		//$form['#tree'] = TRUE; // moved to below
+		$form['base']['quantities']['quantity_row'] = array(
+		'#type' => 'fieldset',
+		'#title' => "<span >" . t('Quantity') . "</span><span style='margin-left:25px;'>" . t('Discount') . "</span>",
+		// Set up the wrapper so that AJAX will be able to replace the fieldset.
+		'#prefix' => '<div id="names-fieldset-wrapper">',
+		'#suffix' => '</div>',
+		'#theme' => 'quantity_rows',
+		'#tree' => TRUE,
+
+		);
+
+		// Build the fieldset with the proper number of names. We'll use
+		// $form_state['num_names'] to determine the number of textfields to build.
+		if (empty($form_state['base']['quantities']['num_names'])) {
+		$form_state['base']['quantities']['num_names'] = 1;
+		}
+
+		if (isset($form["#node"]->quantity) && $rows > $form_state['base']['quantities']['num_names']) {
+		$form_state['base']['quantities']['num_names'] = $rows;
+		}
+
+		//dpm($form_state['base']['quantities']['num_names'], "num_names");
+		//dpm($rows, "rows");
+
+	
+		for ($i = 0; $i < $form_state['base']['quantities']['num_names']; $i++) {
+			if (isset($node->quantity[$i]['qty_id'])) {
+				$this_qty_id = $node->quantity[$i]['qty_id'];
+			} else {
+				$this_qty_id = NULL;
+			}
+			if (isset($node->quantity[$i]['qty'])) {
+				$this_qty = $node->quantity[$i]['qty'];
+			} else {
+				$this_qty = NULL;
+			}
+			if (isset($node->quantity[$i]['dis'])) {
+				$this_dis = $node->quantity[$i]['dis'];
+			} else {
+				$this_dis = NULL;
+			}
+			$form['base']['quantities']['quantity_row'][$i]['qty_id'] = array(
+	        	'#type' => 'hidden',
+	        	'#value' => $this_qty_id,
+	      	);
+			$form['base']['quantities']['quantity_row'][$i]['qty'] = array(
+			  	'#type' => 'textfield',
+			  	//'#title' => t('Quantity'),
+			  	'#default_value' => $this_qty,
+			  	'#size' => 15,
+			  	'#weight' => $i,
+			);
+			$form['base']['quantities']['quantity_row'][$i]['dis'] = array(
+		        '#type' => 'textfield',
+		        //'#title' => t('Discount'),
+		        '#default_value' => $this_dis,
+		        '#size' => 15,
+		        '#weight' => $i,
+		     );
+			$form['base']['quantities']['quantity_row'][$i]['remove'] = array(
+	        	'#type' => 'checkbox',
+	        	//'#value' => $node->quantity[$i]['qty_id'],		
+	        	'#title' => t('remove'),	        
+	      	);
+
+		}
+
+
+
+
+
+		$form['base']['quantities']['quantity_row']['add_name'] = array(
+		'#type' => 'submit',
+		'#value' => t('Add one more'),
+		'#submit' => array('uc_jqcalc7_add_more_add_one'),
+		// See the examples in ajax_example.module for more details on the
+		// properties of #ajax.
+		'#ajax' => array(
+		  'callback' => 'uc_jqcalc7_add_more_callback',
+		  'wrapper' => 'names-fieldset-wrapper',
+		),
+		);
+
+
+		// This simply allows us to demonstrate no-javascript use without
+		// actually turning off javascript in the browser. Removing the #ajax
+		// element turns off AJAX behaviors on that element and as a result
+		// ajax.js doesn't get loaded.
+		// For demonstration only! You don't need this.
+		if ($no_js_use) {
+		// Remove the #ajax from the above, so ajax.js won't be loaded.
+		if (!empty($form['base']['quantities']['quantity_row']['remove_name']['#ajax'])) {
+		  unset($form['base']['quantities']['quantity_row']['remove_name']['#ajax']);
+		}
+		unset($form['base']['quantities']['quantity_row']['add_name']['#ajax']);
+		}
+
+
+	}
+
+
+	// Form for bypassing attribute quantity calculations
+	if (strstr($form_id, 'uc_object_attributes_form')) {
+	  $options = uc_jqcalc7_get_attributes_options($form['id']['#value']);
+	  $priced_attributes = uc_attribute_priced_attributes($form['id']['#value']);
+	  $options_selected = uc_jqcalc7_get_attributes_options_bypass($form['id']['#value']);
+	  $bypass_options = array('none', 'discount'); // removed 'quantity/discount' option - L0rne
+	  //dpm($form['id']['#value'], "nid");
+	  //dpm($options, "options from uc_object_attributes_form");
+	  //dpm($priced_attributes, "priced_attributes from uc_object_attributes_nform");
+	  //dpm($options_selected, "options_selected from uc_object_attributes_form");
+	  //dpm($bypass_options, "bypass_options from uc_object_attributes_form");
+
+	  if (!empty($options)) {
+	    // Rearrange submit buttons
+	    $form['save']['#weight'] = 2;
+	    $form['reset']['#weight'] = 3;
+	    // Fieldset for the quantity values
+	    $form['bypass'] = array(
+	      '#type' => 'fieldset',
+	      '#title' => t('Jquery Product Calculator - Bypass'),
+	      '#weight' => 0,
+	      '#collapsible' => TRUE,
+	      '#collapsed' => FALSE,
+		  '#description' => t('Options set to bypass "Discount" will not have quantity discounts applied to the option value.'), 
+	    );
+
+	  foreach ($options as $key => $value) {
+	    $form['bypass']['attribute_row'][$key]['attributes'] = array(
+	      '#type' => 'select',
+	      '#title' => $value,
+	      '#options' => $bypass_options,
+	      '#default_value' => !in_array($key, $priced_attributes) ? 0 : $options_selected[$key],
+	      '#required' => FALSE,
+	      '#disabled' => !in_array($key, $priced_attributes),
+	    );
+
+	    $bypass = 0;
+
+	    if (isset($options_selected[$key]['bypass'])) {
+	    	$bypass = $options_selected[$key]['bypass'];
+	    }
+
+	    //dpm($key, "key " . $key);
+	    //dpm($bypass, "bypass");
+
+	    $form['bypass']['attribute_row'][$key]['qty_multiplier'] = array(
+	      '#type' => 'textfield',
+	      '#title' => $bypass == 2 ? t('%attrib qty multiplier', array('%attrib' => $value)): '',
+	      '#size' => 14,
+	      '#default_value' => $bypass == 2 ? $options_selected[$key]['multiplier']: 0,
+	      '#attributes' => $bypass == 2 ? '': array('style' => 'visibility:hidden;float:right'),
+	      '#required' => FALSE,
+	      '#disabled' => $bypass == 2 ? FALSE : TRUE,
+	      '#description' => $bypass == 2 ? t('Amount to multiply by the quantity and add to the price.'): '',
+	    );
+	  }
+
+	   // Add an additional form submit handler
+	   $form['#submit'][] = 'uc_jqcalc7_uc_object_attributes_form_submit';        
+	  }
+	}
+
+	if (strstr($form_id, 'uc_cart_pane_quotes')) {
+		//dpm($form, $form_id . " form from uc_jqcalc7_form_alter");
+		//dpm($form_state, $form_id . " form_state from uc_jqcalc7_form_alter");
+
+		// hardcode delivery zone
+		$form['address']['#default_value']['delivery_zone'] = 4;
+
+		//dpm($form['address'], "address");
+		// can't figure out how to hide just one part of the address field.
+		// I'll do it with CSS.
+
+	}
+
+}
+
+
+
+/**
+ * Loads all attributes associated with a product node.
+ */
+function uc_jqcalc7_get_attributes_options($nid) {
+  $attributes = array();
+
+  $result = db_query("SELECT upa.aid, ua.name FROM {uc_product_attributes} AS upa LEFT JOIN {uc_attributes} AS ua ON upa.aid = ua.aid WHERE upa.nid = :nid ORDER BY upa.ordering, ua.name", array(':nid' => $nid));
+
+  	foreach ($result as $attribute) {
+
+  		$attributes[$attribute->aid] = $attribute->name;
+	}
+
+  return $attributes;
+}
+
+
+/**
+ * Loads checked attributes that bypass qty/discount for a specific product node.
+ */
+function uc_jqcalc7_get_attributes_options_bypass($nid) {
+  $attributes = array();
+
+  $result = db_query("SELECT ujb.aid, ujb.bypass, ujb.qty_multiplier FROM {uc_jqcalc_bypass} AS ujb WHERE ujb.nid = :nid", array(':nid' => $nid));
+
+  foreach ($result as $attribute) {
+    $attributes[$attribute->aid] = array('bypass' => $attribute->bypass, 'multiplier' => $attribute->qty_multiplier);
+  }
+
+  return $attributes;
+}
+
+
+function uc_jqcalc7_node_load($nodes, $types) {
+	//dpm($nodes);
+	foreach ($nodes as $node) {
+		if ($node->type == 'product') {
+
+	      $result = db_query("SELECT * FROM {uc_jqcalc} WHERE nid = :nid order by qty", array(':nid' => $node->nid));
+	      $i = 0;
+  
+	      foreach ($result as $row) {  
+	        $node->quantity[$i]['qty_id'] = $row->qty_id;
+	        $node->quantity[$i]['qid'] = $row->qid;
+	        $node->quantity[$i]['qty'] = $row->qty;
+	        $node->quantity[$i]['dis'] = $row->dis;
+	        $i++;
+	      }
+	    }
+	}
+}
+
+
+
+function uc_jqcalc7_node_update($node) {
+	if ($node->type == 'product') {
+		//dpm($node, "node from uc_jqcalc7_node_update");
+
+		//take the last element out of $node->quantity_row; it's a button
+		$garbage = array_pop($node->quantity_row);
+
+      if ($node->quantity_row && is_array($node->quantity_row)) {
+        foreach ($node->quantity_row as $key => $row) {
+          if ($row['remove'] && $row['qty_id']) {
+            db_query('DELETE FROM {uc_jqcalc} WHERE qty_id = :qty_id', array(':qty_id' => $row['qty_id']));
+            //dpm($row, "update: attempting to remove");
+          }
+          if (!empty($row['qty']) && !$row['qty_id'] && !$row['remove']) {
+            db_query("INSERT INTO {uc_jqcalc} SET qty = :qty, dis = :dis, nid = :nid, qid = :key", array(':qty' => $row['qty'], ':dis' => $row['dis'], ':nid' => $node->nid, ':key' => $key));
+            //dpm($row, "update: attempting to insert");
+          }
+          elseif ($row['qty_id'] && !$row['remove']) {;
+            db_query("UPDATE {uc_jqcalc} SET qty = :qty, dis = :dis, nid = :nid, qid = :key WHERE qty_id = :qty_id", array(':qty' => $row['qty'], ':dis' => $row['dis'], ':nid' => $node->nid, ':key' => $key, ':qty_id' => $row['qty_id']));
+            //dpm($row, "update: attempting to update");
+          }
+        }
+      }
+    }
+
+
+}
+
+
+function uc_jqcalc7_node_validate($node, $form, &$form_state) {
+	if ($node->type == 'product') {
+		//dpm($node, "node from uc_jqcalc7_node_validate");
+
+		//take the last element out of $node->quantity_row; it's a button
+		$garbage = array_pop($node->quantity_row);
+		$error = "";
+	    foreach ($node->quantity_row as $row) {
+	    	//dpm($row, "row from uc_jqcalc7_node_validate");
+	      if (!$row['remove']) {
+	      	if (empty($row['qty'])) {
+	          $error = t('Please enter a value for quantity.');      
+	          break;
+	        }
+	        if (!empty($row['qty']) && !is_numeric($row['qty'])) {
+	          $error = t('You have entered an invalid quantity.');      
+	          break;
+	        }
+	        if (!is_numeric($row['dis']) || $row['dis'] < 0 || $row['dis'] >= 1) {
+	          $error = t('Jquery Product Calculator Discount must be a decimal number between 0 and 1.');
+	          break;
+	        }
+	      }
+	    }
+	    if ($error) {
+	      form_set_error('', $error);
+	    }    
+  	} 
+
+}
+
+
+function uc_jqcalc7_node_insert($node) {
+	if ($node->type == 'product') {
+		//dpm($node, "node from uc_jqcalc7_node_insert");
+
+		//take the last element out of $node->quantity_row; it's a button
+		$garbage = array_pop($node->quantity_row);
+      if ($node->quantity_row && is_array($node->quantity_row)) {
+        foreach ($node->quantity_row as $key => $row) {
+        	//dpm($row, "row {$key} from uc_jqcalc7_node_insert");
+          if (!$row['remove'] && !empty($row['qty'])) {
+          	db_query("INSERT INTO {uc_jqcalc} SET qty = :qty,  dis = :dis, nid = :nid, qid = :qid", array(':qty' => $row['qty'], ':dis' => $row['dis'], ':nid' => $node->nid, ':qid' => $key));
+
+          }         
+        }
+      }
+    }
+
+}
+
+
+
+/**
+ * Ahah Ajax request callback function for add more quantity.
+ */
+function uc_jqcalc7_qty_add_js($form, &$form_state) {
+  include_once 'modules/node/node.pages.inc';
+  
+  $args = $form['#parameters'];
+  $form_id = array_shift($args);
+  // We will run some of the submit handlers so we need to disable redirecting.
+  $form['#redirect'] = FALSE;
+  // We need to process the form, prepare for that by setting a few internals
+  // variables.
+  $form['#post'] = $_POST;
+  $form['#programmed'] = FALSE;
+  $form_state['post'] = $_POST;
+  // Build, validate and if possible, submit the form.
+  drupal_process_form($form_id, $form, $form_state);
+  // This call recreates the form relying solely on the form_state that the
+  // drupal_process_form set up.
+  $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
+  // Render the new output.
+  $choice_form = $form['base']['quantities']['quantity_row'];
+  unset($choice_form['#prefix'], $choice_form['#suffix']); // Prevent duplicate wrappers.
+  theme('status_messages');
+  $output = drupal_render($choice_form);
+  drupal_json(array('status' => TRUE, 'data' => $output));
+}
+
+
+
+
+
+/**
+ * Get product quantity discount.
+ */
+function uc_jqcalc7_get_discount($nid, $qty) {
+	$result = db_query("SELECT dis FROM {uc_jqcalc} WHERE nid = :nid AND qty = :qty", array(':nid' => $nid, ':qty' => $qty))->fetchField();
+  
+  if ($result > 0) {
+      return $result;
+  } else {
+      return 1;
+  }
+}
+
+
+
+
+
+
+/**
+ * Callback element needs only select the portion of the form to be updated.
+ * Since #ajax['callback'] return can be HTML or a renderable array (or an
+ * array of commands), we can just return a piece of the form.
+ */
+function uc_jqcalc7_qty_add_callback($form, $form_state) {
+  	//return $form['uc-product-234.display-price'];
+	$wrapper = ".quantity-row";
+	//dpm($form_state['storage']['variant'], "variant");
+	return $form['quantity-row'];
+}
+
+
+function recursive_array_search($needle,$haystack) {
+    foreach($haystack as $key=>$value) {
+        $current_key=$key;
+        if($needle===$value OR (is_array($value) && recursive_array_search($needle,$value) !== false)) {
+            return $current_key;
+        }
+    }
+    return false;
+}
+
+
+/**
+ * This callback updates the display price when a quantity value is selected.
+ */
+function uc_jqcalc7_qty_change_callback($form, &$form_state) {
+	$node =& $form['node']['#value'];
+	$data = $node->data;
+	$id = ".display-price";
+	$selected_qty_value = $form_state['input']['qty'];
+	//dpm($selected_qty_value, "selected_qty_value");
+	$orig_node = node_load($node->nid);
+	//dpm($orig_node, "orig_node");
+	$current_price = $orig_node->price; 
+
+	$discount = 0; // "0" is no discount
+  	$discount = uc_jqcalc7_get_discount($node->nid, $selected_qty_value);
+  	//dpm($discount, "discount from uc_jqcalc7_qty_change_callback");
+
+  	$bypass = uc_jqcalc7_get_attributes_options_bypass($node->nid);
+  	//dpm($bypass, "bypass from uc_jqcalc7_qty_change_callback");
+
+  	$selected_qty_value = (int)$form_state['input']['qty'];
+
+  	$current_price_no_discount = $current_price;
+  	// apply discount to the base price
+  	if ($discount > 0 && $discount < 1) {;
+  		$current_price = $current_price *(1 - $discount);
+  	}
+
+  	
+  	// to recalculate the price, I have to go through all selected 
+  	// options to get the correct price, and discount/bypass
+  	// combination.
+  	// Also see changes to uc_attribute_uc_product_alter
+  	// which updates displayed price when a product attribure
+  	// is changed
+
+  	$options = _uc_cart_product_get_options($node);
+
+    //dpm($options, "options from qty");
+    foreach ($options as $option) {
+      $aid = $option['aid'];
+
+      $current_price_before = $current_price;
+      
+      if ($bypass[$aid]['bypass'] != 1 && $discount < 1 && $discount > 0) { // bypass "1" means no discount
+        $discount_total = $option['price'] * $discount;
+        $current_price1 += $option['price'] - $discount_total;
+        $current_price += $option['price'] * (1 - $discount);
+        //dpm($option, "option for $aid, {$option['attribute']}");
+        //dpm($discount, "discount for $aid");  
+        
+      } else {
+        $current_price += $option['price'];
+      }
+
+      //dpm($option['price'], "option price");
+      //dpm($option['setup'], "option setup");
+      //dpm($current_price, "current_price");
+
+    }
+
+	$updated_price = ($current_price * $selected_qty_value) + $form_state['storage']['variant']->setup;
+
+	$vars = array('price' => $updated_price);
+  	$updated_price_themed .= theme('uc_price', $vars);
+
+  	$debug = FALSE;
+
+  	if ($debug) {
+  		dpm($orig_node->price, "base_price uc_jqcalc7");
+		dpm($selected_qty_value, "qty uc_jqcalc7");
+		dpm($discount, "discount uc_jqcalc7");
+		dpm($form_state['storage']['variant']->setup, "setup uc_jqcalc7");
+		dpm($options, "options uc_jqcalc7"); // 6 elements
+		dpm($current_price, "current_price uc_jqcalc7");
+		dpm($updated_price, "updated_price uc_jqcalc7");
+  	}
+  	
+
+	$product_class = "uc-product-" . $node->nid;
+	$html = '<div class="product-info display-price ' . $product_class . '">' . $updated_price_themed . '</div>';
+
+	$commands[] = ajax_command_replace($id, $html); // updates display_price.
+
+
+	// Update attribute form fields, duplicating what happens in
+	// uc_attribute_option_ajax
+  	
+  	$parents[] = "attributes";
+  	$wrapper = '#' . 'uc_product_add_to_cart_form-' . $form['nid']['#value'] . '-attributes';
+
+  	//dpm($parents, "parents");
+  	//dpm($wrapper, "wrapper");
+
+  	while ($key = array_pop($parents)) {
+		if ($key == 'attributes') {
+		  array_push($parents, $key);
+		  $element = drupal_array_get_nested_value($form, $parents);
+		  $commands[] = ajax_command_replace($wrapper, drupal_render($element));
+		  break;
+		}
+	}
+
+
+	$commands[] = ajax_command_prepend($wrapper, theme('status_messages'));
+
+
+	// update the quote form
+	$wrapper_quote = '#add-to-cart-shipping-quote';
+
+	// load a copy of that other form
+	$form_state['storage']['variant']->qty = $selected_qty_value;
+	$items[] = $form_state['storage']['variant'];
+
+	$form_pre_render = drupal_get_form('uc_cart_pane_quotes', $items);
+	$quotes_form = '<div id="add-to-cart-shipping-quote">' . drupal_render($form_pre_render) . "</div>";
+
+	$commands[] = ajax_command_replace($wrapper_quote, $quotes_form);
+
+	return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+
+
+/**
+ * Submit handler for the "add-one-more" button.
+ *
+ * Increments the max counter and causes a rebuild.
+ */
+function uc_jqcalc7_add_more_add_one($form, &$form_state) {
+  $form_state['base']['quantities']['num_names']++;
+  $form_state['rebuild'] = TRUE;
+}
+
+
+/**
+ * Callback for both ajax-enabled buttons.
+ *
+ * Selects and returns the fieldset with the names in it.
+ */
+function uc_jqcalc7_add_more_callback($form, $form_state) {
+  return $form['base']['quantities']['quantity_row'];
+}
+
+
+/**
+ * Submit handler for the "remove one" button.
+ *
+ * Decrements the max counter and causes a form rebuild.
+ */
+function uc_jqcalc7_add_more_remove_one($form, &$form_state) {
+  dpm($form_state['base']['quantities']['num_names'], "num before");
+  if ($form_state['base']['quantities']['num_names'] > 1) {
+    $form_state['base']['quantities']['num_names']--;
+  }
+  dpm($form_state['base']['quantities']['num_names'], "num after");
+  $form_state['rebuild'] = TRUE;
+}
+
+
+
+
+/**
+ * This passed the discounted price, but I still have to add the setup price,
+ * after the quantity is factored in.  I am relying on edits in 
+ * uc_product_uc_cart_display to do that.
+ */
+
+function uc_jqcalc7_uc_cart_alter(&$items) {
+    //dpm($items, "items from uc_jqcalc7_uc_cart_alter");
+
+    foreach ($items as $key => $item) {
+    	//dpm($item, "item from uc_jqcalc7_uc_cart_alter");
+
+    	// need to alter the price to add setup and discount
+    	// if there are currently any attributes selected, go through them
+		// $node->data is where this is stored.
+		if (isset($item->data['attributes']) && is_array($item->data['attributes'])) {
+
+			$selected_qty_value = $item->qty;
+		    //dpm($selected_qty_value, "selected_qty_value");
+		    $orig_node = node_load($item->nid);
+			//dpm($orig_node, "orig_node");
+			$current_price = $orig_node->price; // build this up from scratch instead of fetching current
+			//dpm($current_price, "price before discount");
+
+		    $discount = 0; // no discount
+		    $discount = uc_jqcalc7_get_discount($item->nid, $selected_qty_value);
+		    //dpm($discount, "discount");
+
+		    $bypass = uc_jqcalc7_get_attributes_options_bypass($item->nid);
+		    //dpm($bypass, "bypass ");
+
+		    $selected_qty_value = (int)$item->qty;
+
+		    // apply discount to the base price
+		  	if ($discount > 0 && $discount < 1) {
+		  		$current_price = $current_price *(1 - $discount);
+		  	}
+		    //dpm($current_price, "price after discount");
+
+		    // Returns an array keyed by attribute aid containing "bypass" and "multipier"
+		    // values for the given node.
+		    
+		    $options = _uc_cart_product_get_options($item);
+    		//dpm($options, "options ");
+
+			foreach ($options as $option) {
+		      $aid = $option['aid'];
+		      
+		      //dpm($option['aid'], "option aid");
+		      //dpm($bypass[$aid]['bypass'], "to bypass or not to bypass" . $aid);
+		      
+		      if ($bypass[$aid]['bypass'] != 1 && $discount < 1 && $discount > 0) { // "1" means yes, bypass, so no discount
+		        $current_price += $option['price'] * (1 - $discount);
+		        //dpm($option, "option for $aid, {$option['attribute']}");
+		        //dpm($discount, "discount for $aid");
+
+		      } else {
+		        $current_price += $option['price'];
+		      }
+
+		      //dpm($option['price'], "option price");
+		      //dpm($option['setup'], "option setup");
+		      //dpm($current_price, "current_price");
+		    }
+
+
+
+		    $updated_price = $current_price;
+
+		    //dpm($updated_price, "updated price");
+
+		    $items[$key]->price = $updated_price;
+
+		}
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+function uc_jqcalc7_schema_alter(&$schema) {
+  // Add field to existing schema.
+  $schema['uc_product_options']['fields']['setup'] = array(
+    'description' => "The adjustment to a product's setup fee with the chosen option.",
+    'type' => 'numeric',
+    'precision' => 16,
+    'scale' => 5,
+    'not null' => TRUE,
+    'default' => 0,
+  );
+}
+
+
+
+/**
+ * Additional submit handler for uc_object_attributes_form.
+ */
+function uc_jqcalc7_uc_object_attributes_form_submit(&$form, &$form_state) {
+    // Retrieve saved values
+    $saved_values = array_keys(uc_jqcalc7_get_attributes_options_bypass($form['id']['#value']));
+    // Load priced attributes to do some cleanup
+    $priced_attributes = uc_attribute_priced_attributes($form['id']['#value']);
+
+    foreach ($form_state['values']['bypass']['attribute_row'] as $key => $value) {
+        if (!in_array($key, $saved_values)) {
+        	db_query("INSERT INTO {uc_jqcalc_bypass} SET nid = :nid, aid = :aid, bypass = :bypass, qty_multiplier = :qty_multiplier", array(':nid' => $form['id']['#value'], ':aid' => $key, ':bypass' => $value['attributes'], ':qty_multiplier' => $value['qty_multiplier']));
+        } else {
+			db_query("UPDATE {uc_jqcalc_bypass} SET bypass = :bypass, qty_multiplier = :qty_multiplier WHERE nid = :nid AND aid = :aid", array(':bypass' => $value['attributes'], ':qty_multiplier' => $value['qty_multiplier'], ':nid' => $form['id']['#value'], ':aid' => $key));
+        }
+        	db_query('DELETE FROM {uc_jqcalc_bypass} WHERE nid = :nid AND aid =:aid NOT IN (SELECT aid FROM {uc_product_attributes} WHERE nid = :nid)', array(':nid' => $form['id']['#value'], ':aid' => $key, ':nid' => $form['id']['#value'],));
+    }
+}
+
+
+

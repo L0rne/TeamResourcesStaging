@@ -1,0 +1,5 @@
+name = Data Color Threshold
+description = Defines a field for configuring color thresholds based on data scores in Benchmark reports.
+package = Team Diagnostics
+core = 7.x
+dependencies[] = field

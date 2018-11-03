@@ -1,0 +1,7 @@
+; $Id$
+name = Team Diagnostics
+description = Implements functionality for team diagnostics
+version = 7.x-1.0
+package = Team Diagnostics
+core = 7.x
+files[] = team_diagnostics.module

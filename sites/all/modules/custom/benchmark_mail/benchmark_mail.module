@@ -1,0 +1,24 @@
+<?php
+
+class BenchmarkMailSystem extends DefaultMailSystem {
+  public function format(array $message) {
+    $message['body'] = implode("\n\n", $message['body']);
+    $message['body'] = drupal_wrap_mail($message['body']);
+    return $message;
+  }
+}
+
+/**
+ *  implements hook_mail
+ */
+function benchmark_mail_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'html_mail':
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8;';
+      // $message['subject'] = $params['subject'];
+      // $message['subject'] = "Request to join a Team Benchmark Survey";
+      $message['subject'] = "Invitation to your Team Resources Survey";
+      $message['body'][] = $params['body'];
+      break;
+  }
+}

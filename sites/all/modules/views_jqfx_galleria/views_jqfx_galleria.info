@@ -1,0 +1,10 @@
+; $Id$
+name = Views jQfx: Galleria
+description = Integrates the Galleria plugin with Views jQfx.
+dependencies[] = views_jqfx
+package = Views
+core = 7.x
+files[] = views_jqfx_galeria.module
+files[] = views_jqfx_galleria.views_jqfx.inc
+files[] = theme/views_jqfx_galleria.theme.inc
+

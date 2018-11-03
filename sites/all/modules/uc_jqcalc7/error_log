@@ -1,0 +1,2 @@
+[28-Jun-2017 20:26:38 America/Chicago] PHP Fatal error:  Class 'Generic_Sniffs_PHP_ForbiddenFunctionsSniff' not found in /home/benchmark/.composer/vendor/drupal/coder/coder_sniffer/Drupal/Sniffs/Functions/DiscouragedFunctionsSniff.php on line 20
+[28-Jun-2017 20:51:11 America/Chicago] PHP Fatal error:  Class 'Generic_Sniffs_PHP_ForbiddenFunctionsSniff' not found in /home/benchmark/.composer/vendor/drupal/coder/coder_sniffer/Drupal/Sniffs/Functions/DiscouragedFunctionsSniff.php on line 20

@@ -1,0 +1,7 @@
+; $Id$
+name = Benchmark Mail System
+description = Implements mail functionality for team diagnostics
+version = 7.x-1.0
+package = Team Diagnostics
+core = 7.x
+files[] = benchmark_mail.module

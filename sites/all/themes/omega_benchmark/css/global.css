@@ -1,0 +1,31 @@
+/* This file will hold styles for the mobile version of your website (mobile first). */
+/* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+
+div#benchmark-commerce-cart-block {
+  z-index: 1000;
+}
+
+div.view-id-commerce_cart_block {
+  min-height: 190px;
+  background-color: #fff;
+  padding: 10px;
+}
+
+div.region-footer-first-inner section.triaxia-info {
+  cursor: pointer;
+}
+
+#lang_dropdown_form_language_content {
+  position: absolute;
+  right: 1px;
+  top: 113px;
+}
+
+#lang_dropdown_form_language_content  .captcha-admin-links {
+  display: none;
+}
+
+#lang_dropdown_form_language_content  img.language-icon {
+  position: relative;
+  top: -6px;
+}

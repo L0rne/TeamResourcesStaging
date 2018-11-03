@@ -1,0 +1,1085 @@
+<?php
+
+// $Id$
+
+
+
+/**
+
+ * @file
+
+ * Implements functionality for team diagnostics
+
+ *
+
+ * 
+
+ */
+
+
+
+module_load_include('inc', 'team_diagnostics', 'team_diagnostics.team_node');
+
+module_load_include('inc', 'team_diagnostics', 'team_diagnostics.blocks');
+
+module_load_include('inc', 'team_diagnostics', 'team_diagnostics.css-parser');
+
+module_load_include('inc', 'team_diagnostics', 'team_diagnostics.pdflib');
+
+
+
+/**
+
+ * Implements hook_menu().
+
+ */
+
+function team_diagnostics_menu() {
+
+  
+
+  $items['team-diagnostic/survey'] = array(
+
+    'title' => 'Diagnostic',
+
+    'description' => 'Team diagnostic survey.',
+
+    'page callback' => 'drupal_get_form',
+
+    'page arguments' => array('team_diagnostic_survey_form'),
+
+    'title callback' => 'survey_title_callback',
+
+    'file' => 'team_diagnostics.survey.inc',
+
+    'file path' => drupal_get_path('module', 'team_diagnostics'),
+
+    'access callback' => TRUE,
+
+  );
+
+  
+
+  $items['team/%/%team_js/delete/%/%'] = array(
+
+      'title' => 'Delete Team Email',
+
+      'page callback' => 'team_email_delete',
+
+      'page arguments' => array(1, 2, 4, 5),
+
+      'access callback' => TRUE,
+
+      'type' => MENU_CALLBACK,
+
+  );
+
+  
+
+  $items['team/%/%team_js/apply/%/%'] = array(
+
+      'title' => 'Apply Diagnostic',
+
+      'page callback' => 'apply_diagnostic',
+
+      'page arguments' => array(1, 2, 4, 5),
+
+      'access callback' => TRUE,
+
+      'type' => MENU_CALLBACK,
+
+  );
+
+  
+
+  //returns a pdf MIME type
+
+  $items['team-diagnostic/report'] = array(
+
+    'title' => 'Diagnostic Report',
+
+    'description' => 'Generate a multi-page PDF from team responses.',
+
+    'page callback' => 'get_diagnostic_report', //'diagnostic_report',
+
+    'access callback' => 'diagnostic_report_access', //TRUE, // 'user_access', //'diagnostic_report_access',
+
+    //'access arguments' => array('view all diagnostic reports', 'view own diagnostic reports'),
+
+    //'file' => 'team_diagnostics.report.inc',
+
+    //'file path' => drupal_get_path('module', 'team_diagnostics'),
+
+    //'access arguments' => array('access content'),
+
+  );
+
+  
+
+  $items['team/testing'] = array(
+
+    'title' => 'XML Tester',
+
+    'description' => 'This page is testing the XML report objects design concept',
+
+    'page callback' => 'report_xml_tester',
+
+    'access callback' => TRUE,
+
+    'file' => 'team_diagnostics.test.inc',
+
+    'file path' => drupal_get_path('module', 'team_diagnostics'),
+
+  );
+
+  
+
+  $items['jeditable/ajax/save'] = array(
+
+    'title' => 'Save field',
+
+    'page callback' => '_jeditable_ajax_save',
+
+    'page arguments' => array(3, 4),
+
+    //'access arguments' => array('use jeditable'),
+
+    'access callback' => TRUE,
+
+  );
+
+  
+
+  $items['team-diagnostic/create/team'] = array(
+
+    'title' => 'Create a Team Wizard',
+
+    'page callback' => 'drupal_get_form',
+
+    'page arguments' => array('team_wizard'),
+
+    'access callback' => TRUE,
+
+    'description' => 'Multistep form for creation teams.',
+
+    'file' => 'team_diagnostics.team_wizard.inc',
+
+  );
+
+  
+
+  return $items;
+
+}
+
+
+
+function get_diagnostic_report() {
+
+
+
+  $args = func_get_args();
+
+  $line_id = $args[0];
+
+  
+
+  $report_info = get_team_diagnostic_info_from_line_item($line_id);
+
+  
+
+  $report_id = $report_info['report_id'];  
+
+  $report_node = node_load($report_id);
+
+  
+
+  $report_info['line_item_id'] = $line_id;
+
+  $report_info['base_class'] = $report_node->field_base_class[$report_node->language][0]['safe_value'];
+
+  $report_info['default_category_order'] = $report_node->field_default_category_order[$report_node->language][0]['safe_value'];
+
+  $report_info['data_color_thresholds'] = $report_node->field_data_color_range[$report_node->language];
+
+  
+
+  $report_css_file = drupal_get_path('module', 'team_diagnostics') . '/pdf.css';
+
+  $style = new triaxia_CSSParser();
+
+  $style->Parse($report_css_file);
+
+  $report_info['css'] = $style;
+
+  $template_filename = $report_node->field_pdf_template[$report_node->language][0]['filename'];
+
+  //var_dump($template_filename);
+
+  $pdf = new DiagnosticPDF($report_info);
+
+  //die(var_dump($pdf));
+
+  $pdf->merge_template($template_filename);
+
+  $pdf->print_pdf();
+
+  exit();
+
+  return '<h3>I\'m not quite dead yet.</h3>';
+
+}
+
+
+
+function team_diagnostics_preprocess_page(&$vars) {
+
+  $args = preg_split('/\//', $_GET['q']);
+
+  if (isset($args[2])) {
+
+    if ($args[0] == 'team-diagnostic' && $args[1] == 'create' && $args[2] == 'team') {
+
+      drupal_add_js(drupal_get_path('module', 'team_diagnostics') . '/team.js');
+
+    }
+
+  }
+
+  return;
+
+}
+
+function team_diagnostics_permission() {
+
+  //$stop = 'here for a moment';
+
+  return array(
+
+    'view all diagnostic reports' => array(
+
+      'title' => t('View all diagnostic reports'),
+
+      'description' => t('Allows users to view all diagnostic reports for any team.'),
+
+    ),
+
+    'view own diagnostic reports' => array(
+
+      'title' => t('View own diagnostic reports'),
+
+      'description' => t('Allows users to view the diagnostic reports for their teams only.'),
+
+    ),
+
+  );
+
+}
+
+
+
+function diagnostic_report_access() {
+
+  global $user;
+
+  $args = preg_split('/\//', $_GET['q']); // func_get_args();
+
+  if (user_access('view all diagnostic reports', $user)) {
+
+    return TRUE;
+
+  }
+
+  
+
+  $args = preg_split('/\//', $_GET['q']); // func_get_args();
+
+  if (count($args) < 3) {
+
+    return NODE_ACCESS_IGNORE;
+
+  }
+
+  
+
+  $line_item_id = $args[2];
+
+  $team_info = get_team_diagnostic_info_from_line_item($line_item_id);
+
+  
+
+  if ($user->uid == $team_info['uid'] && user_access('view own diagnostic reports', $user)) {
+
+    return TRUE;
+
+  }
+
+  
+
+  return FALSE;
+
+}
+
+
+
+/*******************************************************************************
+
+ * Implements the Team Diagnostic Survey Form Meta Data
+
+ ******************************************************************************/
+
+
+
+function team_diagnostics_element_info() {
+
+ 
+
+  $types['survey_form_radio_scale'] = array(
+
+    '#input' => TRUE,
+
+    '#return_value' => TRUE,
+
+    '#process' => array('form_process_radios', 'ajax_process_form'),
+
+    '#theme' => 'survey_form_radio_scale',
+
+    '#theme_wrappers' => array('form_element'),
+
+  );
+
+  
+
+  return $types;
+
+}
+
+
+
+function team_diagnostics_theme($existing, $type, $theme, $path) {
+
+  return array(
+
+    'survey_form_radio_scale' => array(
+
+      'render element' => 'element',
+
+    ),
+
+  );
+
+}
+
+
+
+/*******************************************************************************
+
+ *  Implements the connection and associations with the Commerce module
+
+ ******************************************************************************/
+
+
+
+/**
+
+ * Allows you to respond when an order is first considered paid in full.
+
+ *
+
+ * The unpaid balance of an order is calculated by subtracting the total amount
+
+ * of all successful payment transactions referencing the order from the order's
+
+ * total. If the balance is less than or equal to zero, it is considered paid in
+
+ * full. The first time an order's balance falls to or below zero, this hook is
+
+ * invoked to allow modules to perform special maintenance as necessary. This
+
+ * hook is invoked after the "When an order is first paid in full" Rules event.
+
+ *
+
+ * Through the administration of payment transactions, it is possible for an
+
+ * order's balance to go above zero. It is then possible for the balance to go
+
+ * back down to or below zero. In either of these cases, no further action is
+
+ * taken. At present, this hook and Rules event are only meant to be invoked the
+
+ * first time an order is considered paid in full.
+
+ *
+
+ * mlp - This hook may not be invoked until you implement a real-world payment method
+
+ * (such as PayPal or Authorize.NET). It doesn't seem to get invoked in the test
+
+ * environment. Nevertheless, I'm keeping it here for a future iteration. For the
+
+ * Prototype, I'll use another event to add the Team Admin role. 8/8/2011
+
+ * 
+
+ */
+
+function team_diagnostics_commerce_payment_order_paid_in_full($transaction) {
+
+  
+
+  watchdog('team_diagnostics', 'hook_commerce_payment_order_paid_in_full called. Refactor "add Team Admin role" logic in team_diagnostics.module.');
+
+  return;
+
+}
+
+
+
+function team_diagnostics_create_team_nodes_from_line_items($commerce_order) {
+
+  watchdog('team_diagnostics', 'team_diagnostics_create_team_nodes_from_line_items called. Team nodes created for diagnostics purchased.');
+
+  
+
+  $uid = $commerce_order->uid;
+
+  $order_id = $commerce_order->order_number;
+
+  //$line_items = $commerce_order->commerce_line_items; // array
+
+  
+
+  $profile_id = $commerce_order->commerce_customer_billing['und'][0]['profile_id'];
+
+  $customer_profile = commerce_customer_profile_load($profile_id);
+
+  //demian changed safe_value to value
+  //$organization = $customer_profile->field_organization['und'][0]['safe_value'];
+  $organization = $customer_profile->field_organization['und'][0]['value'];
+
+
+  
+
+  //get line item info (diagnostic, team name, team size)
+
+  $order = _benchmark_team_pricing_get_line_items_with_fields($order_id);
+
+  
+
+  // group by team name
+
+  $new_teams = array();
+
+  foreach ($order as $line_item) {
+
+    $new_teams[$line_item->field_team_name_value]['uid'] = $uid;
+
+    $new_teams[$line_item->field_team_name_value]['team_name'] = $organization . ' - ' . $line_item->field_team_name_value . ' - ' . date('F-d-Y');
+
+    $new_teams[$line_item->field_team_name_value]['size'] = $line_item->field_team_size_value;
+
+    $new_teams[$line_item->field_team_name_value]['line-items'][] = $line_item->line_item_id;
+
+  }
+
+  dsm($new_teams);
+  
+
+  // create team nodes and apply line items
+
+  foreach ($new_teams as $team) {
+
+    team_diagnostics_create_team_node($team);
+
+  }
+
+}
+
+
+
+
+
+function team_diagnostics_create_team_node($team_args) {
+
+  
+
+  $new_team = new stdClass();
+
+  $new_team->type = "team";
+
+  node_object_prepare($new_team);
+
+  
+
+  $new_team->uid = $team_args['uid'];
+
+  $new_team->title = $team_args['team_name'];
+
+  $new_team->language = LANGUAGE_NONE;
+
+  
+
+  $body_text = t('Enter a helpful description of your team here.'); // $team_args['team_description'];;
+
+  $new_team->body[$new_team->language][0]['value']   = $body_text;
+
+  $new_team->body[$new_team->language][0]['summary'] = text_summary($body_text);
+
+  $new_team->body[$new_team->language][0]['format']  = 'plain_text';
+
+  
+
+  $new_team->field_max_members[$new_team->language][0]['value'] = $team_args['size'];
+
+  
+
+  // add applied diagnostic field
+
+  foreach ($team_args['line-items'] as $line_item_id) {
+
+    if($line_item_id > 0) { 
+
+      $new_team->diagnostic_line_item_id[$new_team->language][]['value'] = $line_item_id;
+
+    }
+
+  }
+
+  
+
+  node_save($new_team);
+
+  return $new_team->nid;
+
+}
+
+
+
+/**
+
+ * mlp - I'm using this event for testing 8/8/2011
+
+ *
+
+ * Allows you to prepare payment transaction data before it is saved.
+
+ *
+
+ * @param $transaction
+
+ *   The payment transaction object to be saved.
+
+ *
+
+ * @see rules_invoke_all()
+
+ */
+
+/* TODO: Configure added role into the email verification process.
+
+function team_diagnostics_commerce_payment_transaction_presave($transaction) {
+
+  global $user;
+
+  
+
+  if($transaction->status == 'success') {
+
+    $roles = $user->roles;
+
+    
+
+    //TODO: This role should be added to the system via this module in order to
+
+    // ensure that the assigning of this role is properly configured. Below, I
+
+    // have just hard-coded the entry from the roles table in the database after
+
+    // configuring it in the UI.
+
+    
+
+    //TODO: Make sure this function does not add the team administrator role to
+
+    // Anonymous or User 1.
+
+    
+
+    $roles[4] = 'team administrator';
+
+    //user_save($user, array('roles' => $roles));
+
+  }
+
+}
+
+
+
+*/
+
+
+
+/**
+
+ * A user account was created.
+
+ *
+
+ * The module should save its custom additions to the user object into the
+
+ * database.
+
+ *
+
+ * @param $edit
+
+ *   The array of form values submitted by the user.
+
+ * @param $account
+
+ *   The user object on which the operation is being performed.
+
+ * @param $category
+
+ *   The active category of user information being edited.
+
+ *
+
+ * @see hook_user_presave()
+
+ * @see hook_user_update()
+
+ 
+
+function team_diagnostics_user_insert(&$edit, $account, $category) {
+
+  
+
+  return;
+
+}
+
+ */
+
+
+
+/**
+
+ * A user account was updated.
+
+ *
+
+ * Modules may use this hook to update their user data in a custom storage
+
+ * after a user account has been updated.
+
+ *
+
+ * @param $edit
+
+ *   The array of form values submitted by the user.
+
+ * @param $account
+
+ *   The user object on which the operation is performed.
+
+ * @param $category
+
+ *   The active category of user information being edited.
+
+ *
+
+ * @see hook_user_presave()
+
+ * @see hook_user_insert()
+
+ 
+
+function team_diagnostics_user_update(&$edit, $account, $category) {
+
+  return;
+
+}
+
+ */
+
+
+
+/**
+
+ * A user account is about to be created or updated.
+
+ *
+
+ * This hook is primarily intended for modules that want to store properties in
+
+ * the serialized {users}.data column, which is automatically loaded whenever a
+
+ * user account object is loaded, modules may add to $edit['data'] in order
+
+ * to have their data serialized on save.
+
+ *
+
+ * @param $edit
+
+ *   The array of form values submitted by the user.
+
+ * @param $account
+
+ *   The user object on which the operation is performed.
+
+ * @param $category
+
+ *   The active category of user information being edited.
+
+ *
+
+ * @see hook_user_insert()
+
+ * @see hook_user_update()
+
+ *
+
+function team_diagnostics_user_presave(&$edit, $account, $category) {
+
+  //if ($account->is_new == 1) {
+
+  //  // $edit['data']['team_diagnostics'] = 'redirect';
+
+  //  return;
+
+  //}
+
+
+
+  //TODO: This role should be added to the system via this module in order to
+
+    // ensure that the assigning of this role is properly configured. Below, I
+
+    // have just hard-coded the entry from the roles table in the database after
+
+    // configuring it in the UI.
+
+  if ($edit['roles'][4] == 0) {  
+
+    
+
+    // the user doesn't have the 'team administrator' role. let's see if she
+
+    // should...
+
+    
+
+    // does she have valid access to the system? for now, we'll assume yes.
+
+    
+
+    // does she have a completed purchase of at least one team diagnostic?
+
+    $completed_orders_count = user_completed_orders_count($account->uid);
+
+    if ($completed_orders_count < 1) {
+
+      return;
+
+    }
+
+    
+
+    //TODO: Make sure this function does not add the team administrator role to
+
+    // Anonymous or User 1.
+
+    $edit['roles'][4] = 4; //'team administrator';
+
+    //$edit['data']['team_diagnostics'] = 'redirect';
+
+    
+
+  }
+
+}
+
+*/
+
+
+
+/*
+
+function team_diagnostics_form_alter(&$form, &$form_state, $form_id) {
+
+  
+
+//  if ($form_id == 'user_profile_form' && $form_state['user']->data['team_diagnostics'] == 'redirect') {
+
+//    $form_state['user']->data['team_diagnostics'] = 'verified user';
+
+//    $form['#submit'][] = 'user_profile_form_redirect';
+
+//  }
+
+  $login_forms = array('user_login_block', 'user_login');
+
+  if (in_array($form_id, $login_forms)) {
+
+    $form['#submit'][] = 'team_diagnostic_user_login_form_redirect';
+
+  }
+
+
+
+}
+
+*/
+
+/*
+
+function _get_team_admin_redirect() {
+
+  global $user;
+
+  if ($user == null) {
+
+    return 'node';
+
+  }
+
+  
+
+  if (!in_array('team administrator', $user->roles)) {
+
+    return 'node';
+
+  }
+
+  
+
+  $teams = get_user_teams($user->uid);
+
+  $redirect = 'user';
+
+  
+
+  switch (count($teams)) {
+
+    case 0:
+
+      $redirect = 'team-diagnostic/create/team';
+
+      break;
+
+    case 1:
+
+      $redirect = 'team/' . $teams[0]['nid'];
+
+      break;
+
+    default:
+
+      break;
+
+  }
+
+  
+
+  return $redirect;
+
+}
+
+*/
+
+
+
+/*
+
+function user_profile_form_redirect($form, &$form_state) {
+
+  
+
+  if (in_array('team administrator', array_values($form_state['user']->roles))) {
+
+    $form_state['redirect'] = 'team-diagnostic/create/team'; // 'node/add/team';
+
+  }
+
+}
+
+*/
+
+
+
+//TODO: move above code to this function and test.
+
+/*
+
+function team_diagnostics_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
+
+  
+
+  if(isset($form_state['user']->data['team_diagnostics'])) {
+
+    if ($form_state['user']->data['team_diagnostics'] == 'redirect') {
+
+      $form_state['user']->data['team_diagnostics'] = 'verified user';
+
+      $form['#submit'][] = 'user_profile_form_redirect';
+
+    }
+
+  }
+
+  
+
+  return;
+
+}
+
+*/
+
+
+
+// for testing environments without smtp configured...TODO: remove in production.
+
+/*
+
+function team_diagnostics_mail($key, &$message, $params) {
+
+  return;
+
+}
+
+*/
+
+
+
+function team_diagnostics_node_view_alter(&$build) {
+
+  $stop = $build;
+
+  if ($build['#node']->type == 'report_page') {
+
+    $build['#post_render'][] = 'render_triaxia_data_object';
+
+  }
+
+  
+
+}
+
+
+
+
+
+
+
+function render_triaxia_data_object($build) {
+
+  require_once(dirname(__FILE__) . '/team_diagnostics.report.inc');
+
+  $report_page = get_report_content($build, -1);
+
+  return $report_page['html'];
+
+}
+
+
+
+
+
+/*
+
+function team_diagnostics_preprocess_node(&$vars) {
+
+  //$vars['title'] = '<span class="edit-me">' . $vars['title'] . '</span>';
+
+  if($vars['type'] == 'team') {
+
+    $vars['classes_array'][] = 'jeditable';
+
+    $jquery = libraries_get_path('jquery.jeditable') . '/jquery.jeditable.js';
+
+    $js = drupal_get_path('module', 'team_diagnostics') . '/drupal_jeditable.js';
+
+    $css = drupal_get_path('module', 'team_diagnostics') . '/team.css';
+
+    drupal_add_js($jquery);
+
+    drupal_add_js($js);
+
+    drupal_add_css($css);
+
+  }
+
+  return;
+
+}
+
+*/
+
+
+
+function _jeditable_ajax_save() {
+
+  // Retrieve the values needed from the post to this page
+
+  $array = explode('-', $_POST['id']);
+
+  list($type, $entity, $field_name, $id) = $array;
+
+  $value = check_plain($_POST['value']);
+
+  
+
+  if($type != 'team') {
+
+    print $value . ' (not changed)';
+
+    exit();
+
+  }
+
+  
+
+  $node = node_load($id);
+
+  switch ($field_name) {
+
+    case 'title':
+
+      $node->title = $value;
+
+      break;
+
+    case 'body':
+
+      $node->body['und'][0]['safe_value'] = $value;
+
+      $node->body['und'][0]['value'] = $value;
+
+      break;
+
+  }
+
+  
+
+  node_save($node);
+
+  
+
+  print $value;
+
+  exit();
+
+}
+
+
+
+/** * Implements hook_menu_alter(). */ 
+function team_diagnostics_menu_alter(&$items) { 
+  //$items['node/add/team']['page callback'] = 'drupal_goto'; 
+  //$items['node/add/team']['page arguments'] = array('node/1'); 
+  $items['node/add/team']['access callback'] = FALSE;
+}
+ 

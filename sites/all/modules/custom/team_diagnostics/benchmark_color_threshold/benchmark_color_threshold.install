@@ -1,0 +1,42 @@
+<?php
+
+/**
+ *  This module provides a 3-column data field table for Benchmark
+ *  reports using the Fields API. The field stores, for each report,
+ *  the data thresholds of the rating scale and the colors to be
+ *  associated with them.
+ *  
+ */
+
+ 
+ /**
+ * Implements hook_field_schema().
+ *
+ * Schema definitions here: http://drupal.org/node/146939
+ *
+ */
+function benchmark_color_threshold_field_schema($field) {
+    $columns = array(
+        'min' => array(
+          'type' => 'float',
+          'size' => 'small',
+          'not null' => FALSE,
+        ),
+        'max' => array(
+          'type' => 'float',
+          'size' => 'small',
+          'not null' => TRUE,
+          'default' => 1,
+        ),
+        'color' => array(
+          'type' => 'char',
+          'length' => '7',
+          'not null' => TRUE,
+          'default' => '#000000',
+        ),
+    );
+    
+    return array(
+        'columns' => $columns,
+    );
+ }

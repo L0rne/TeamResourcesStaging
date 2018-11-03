@@ -1,0 +1,60 @@
+/* $Id$ */
+
+.views-jqfx-cloud-carousel-container {
+  width: 600px;
+  height: 400px;
+  background: #000000;
+}
+
+.views-jqfx-cloud-carousel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+div.cloud-carousel-title-text {
+  color: #fff;
+  display: none;
+  margin: 20px 20px 10px;
+}
+
+div.cloud-carousel-alt-text {
+  color: #fff;
+  display: none;
+  margin: 0 20px 20px;
+}
+
+div.cloud-carousel-left-but {
+  background: url("buttons.png");
+  position:absolute;
+  top:20px;
+  left:500px;
+  height:35px;
+  width:35px;
+}
+
+div.cloud-carousel-left-but:hover {
+  background-position: 0 32px;
+  cursor: pointer;
+  height: 35px;
+  width: 35px;
+}
+
+div.cloud-carousel-right-but {
+  background: url("buttons.png");
+  background-position: 35px 0;
+  position:absolute;
+  top:20px;
+  left:540px;
+  height:35px;
+  width:35px;
+}
+
+div.cloud-carousel-right-but:hover {
+  background-position: 35px 32px;
+  cursor: pointer;
+  height: 35px;
+  width: 35px;
+}
+

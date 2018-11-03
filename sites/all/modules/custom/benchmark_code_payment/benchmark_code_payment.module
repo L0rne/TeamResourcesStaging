@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * @file
+ * Provides an code payment method for Drupal Commerce for testing and
+ *   development.
+ */
+
+
+/**
+ * Implements hook_commerce_payment_method_info().
+ */
+function benchmark_code_payment_commerce_payment_method_info() {
+  $payment_methods = array();
+
+  $payment_methods['benchmark_code_payment'] = array(
+    'title' => t('Pay with a code'),
+    'description' => t('If you were given a code to purchase Team Benchmark diagnostics, use it here.'),
+    'active' => TRUE,
+  );
+
+  return $payment_methods;
+}
+
+/**
+ * Payment method callback: submit form.
+ */
+function benchmark_code_payment_submit_form($payment_method, $pane_values, $checkout_pane, $order) {
+  $form = array();
+
+  // Merge in values from the order.
+  if (!empty($order->data['benchmark_code_payment'])) {
+    $pane_values += $order->data['benchmark_code_payment'];
+  }
+
+  // Merge in default values.
+  $pane_values += array(
+    'name' => '',
+  );
+
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Coupon code'),
+    '#description' => t('Enter your promotion code.'),
+    '#default_value' => $pane_values['name'],
+    '#required' => TRUE,
+  );
+
+  return $form;
+}
+
+/**
+ * Payment method callback: submit form validation.
+ */
+function benchmark_code_payment_submit_form_validate($payment_method, $pane_form, $pane_values, $order, $form_parents = array()) {
+  // Throw an error if a long enough name was not provided.
+  //if (strlen($pane_values['name']) < 2) {
+  $payment_codes = array('TRIAXIA3033','TRIAXIA0985','TRIAXIA1650','ADP2013','MSM02282014', 'HB0815V1');
+  //if ($pane_values['name'] != 'TRIAXIA3033') {
+  IF (!in_array($pane_values['name'], $payment_codes)) {
+    //form_set_error(implode('][', array_merge($form_parents, array('name'))), t('You must enter a name two or more characters long.'));
+    form_set_error(implode('][', array_merge($form_parents, array('name'))), t('The code you entered is not valid.'));
+    
+    // Even though the form error is enough to stop the submission of the form,
+    // it's not enough to stop it from a Commerce standpoint because of the
+    // combined validation / submission going on per-pane in the checkout form.
+    return FALSE;
+  }
+}
+
+/**
+ * Payment method callback: submit form submission.
+ */
+function benchmark_code_payment_submit_form_submit($payment_method, $pane_form, $pane_values, $order, $charge) {
+  $order->data['benchmark_code_payment'] = $pane_values;
+
+  benchmark_code_payment_transaction($payment_method, $order, $charge, $pane_values['name']);
+}
+
+/**
+ * Creates an code payment transaction for the specified charge amount.
+ *
+ * @param $payment_method
+ *   The payment method instance object used to charge this payment.
+ * @param $order
+ *   The order object the payment applies to.
+ * @param $charge
+ *   An array indicating the amount and currency code to charge.
+ * @param $name
+ *   The name entered on the submission form.
+ */
+function benchmark_code_payment_transaction($payment_method, $order, $charge, $name) {
+  $transaction = commerce_payment_transaction_new('benchmark_code_payment', $order->order_id);
+  $transaction->instance_id = $payment_method['instance_id'];
+  $transaction->amount = $charge['amount'];
+  $transaction->currency_code = $charge['currency_code'];
+  $transaction->status = COMMERCE_PAYMENT_STATUS_SUCCESS;
+  $transaction->message = 'Name: @name';
+  $transaction->message_variables = array('@name' => $name);
+
+  commerce_payment_transaction_save($transaction);
+}

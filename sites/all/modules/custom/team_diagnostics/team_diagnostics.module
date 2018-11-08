@@ -205,11 +205,11 @@ function get_diagnostic_report() {
 
   //$report_info['data_color_thresholds'] = $report_node->field_data_color_range[$lang];
 
-  $report_info['base_class'] = is_set($report_node->field_base_class[$lang][0]['safe_value']) ? $report_node->field_base_class[$lang][0]['safe_value'] : $report_node->field_base_class[$report_node->language][0]['safe_value'];
+  $report_info['base_class'] = isset($report_node->field_base_class[$lang][0]['safe_value']) ? $report_node->field_base_class[$lang][0]['safe_value'] : $report_node->field_base_class[$report_node->language][0]['safe_value'];
 
-  $report_info['default_category_order'] = is_set($report_node->field_default_category_order[$lang][0]['safe_value']) ? $report_node->field_default_category_order[$lang][0]['safe_value'] : $report_node->field_default_category_order[$report_node->language][0]['safe_value'];
+  $report_info['default_category_order'] = isset($report_node->field_default_category_order[$lang][0]['safe_value']) ? $report_node->field_default_category_order[$lang][0]['safe_value'] : $report_node->field_default_category_order[$report_node->language][0]['safe_value'];
 
-  $report_info['data_color_thresholds'] = is_set($report_node->field_data_color_range[$lang]) ? $report_node->field_data_color_range[$lang] : $$report_node->field_data_color_range[$report_node->language];
+  $report_info['data_color_thresholds'] = isset($report_node->field_data_color_range[$lang]) ? $report_node->field_data_color_range[$lang] : $$report_node->field_data_color_range[$report_node->language];
 
 
 

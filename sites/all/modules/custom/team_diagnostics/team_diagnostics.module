@@ -194,9 +194,6 @@ function get_diagnostic_report() {
 
   $report_node = node_load($report_id);
 
-  dpm($report_node->language, "report node language");
-  
-
   $report_info['line_item_id'] = $line_id;
 
   //$report_info['base_class'] = $report_node->field_base_class[$lang][0]['safe_value'];
@@ -211,6 +208,9 @@ function get_diagnostic_report() {
 
   $report_info['data_color_thresholds'] = isset($report_node->field_data_color_range[$lang]) ? $report_node->field_data_color_range[$lang] : $$report_node->field_data_color_range[$report_node->language];
 
+    dpm($report_node->field_base_class, "field_base_class");
+    dpm($report_node->default_category_order, "default_category_order");
+    dpm($report_node->default_category_order, "default_category_order");
 
 
   $report_css_file = drupal_get_path('module', 'team_diagnostics') . '/pdf.css';

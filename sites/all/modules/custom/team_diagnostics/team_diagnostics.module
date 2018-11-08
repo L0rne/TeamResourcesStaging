@@ -176,7 +176,7 @@ function team_diagnostics_menu() {
 
 function get_diagnostic_report() {
 
-
+    global $language;
 
   $args = func_get_args();
 
@@ -230,7 +230,7 @@ function get_diagnostic_report() {
   $report_info['css'] = $style;
 
     $pdf_template_info = field_info_field("field_pdf_template");
-    $pdf_template_lang = $pdf_template_info['translatable'] ? entity_language('node', $report_node) : LANGUAGE_NONE;
+    $pdf_template_lang = $pdf_template_info['translatable'] ? $language->language : LANGUAGE_NONE;
 
     var_dump($pdf_template_info);
 

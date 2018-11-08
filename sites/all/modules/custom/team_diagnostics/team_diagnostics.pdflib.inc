@@ -53,8 +53,6 @@ define('TXP_PDFLIB_DEFAULT_FONT', 'cartogothicpro-book');
         
         $this->styles = $report_args['css'];
         unset($report_args['css']);
-
-        var_dump($report_args);
         
         $this->report_info = $report_args;
         if (!isset($this->report_info['base_class'])) $this->report_info['base_class'] = 'diagnostic';

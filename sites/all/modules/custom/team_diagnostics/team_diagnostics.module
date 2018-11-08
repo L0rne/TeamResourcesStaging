@@ -198,8 +198,9 @@ function get_diagnostic_report() {
 
 
     $base_class_info = field_info_field("field_base_class");
-    var_dump($base_class_info);
+
     $base_class_lang = $base_class_info['translatable'] ? entity_language('node', $report_node) : LANGUAGE_NONE;
+    var_dump($base_class_lang);
 
   //$report_info['base_class'] = $report_node->field_base_class[$report_node->language][0]['safe_value'];
 

@@ -197,6 +197,7 @@ function get_diagnostic_report() {
   $report_info['line_item_id'] = $line_id;
 
 
+  // Correctly set
     $base_class_info = field_info_field("field_base_class");
     $base_class_lang = $base_class_info['translatable'] ? entity_language('node', $report_node) : LANGUAGE_NONE;
 
@@ -228,7 +229,10 @@ function get_diagnostic_report() {
 
   $report_info['css'] = $style;
 
-  $template_filename = $report_node->field_pdf_template[$report_node->language][0]['filename'];
+    $pdf_template_info = field_info_field("field_pdf_template");
+    $pdf_template_lang = $pdf_template_info['translatable'] ? entity_language('node', $report_node) : LANGUAGE_NONE;
+
+    $template_filename = $report_node->field_pdf_template[$pdf_template_lang][0]['filename'];
 
   //var_dump($template_filename);
 

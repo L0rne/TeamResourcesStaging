@@ -194,7 +194,7 @@ function get_diagnostic_report() {
 
   $report_node = node_load($report_id);
 
-    var_dump($report_node->field_base_class, "field_base_class");
+    //var_dump($report_node->field_base_class, "field_base_class");
     var_dump($report_node->default_category_order, "default_category_order");
     var_dump($report_node->default_category_order, "default_category_order");
 

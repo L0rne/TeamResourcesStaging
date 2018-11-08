@@ -201,11 +201,12 @@ function get_diagnostic_report() {
 
   $report_info['line_item_id'] = $line_id;
 
-  $report_info['base_class'] = $report_node->field_base_class['und'][0]['safe_value'];
+    $report_info['base_class'] = $report_node->field_base_class[$report_node->language][0]['safe_value'];
 
-  $report_info['default_category_order'] = $report_node->field_default_category_order['und'][0]['safe_value'];
+    $report_info['default_category_order'] = $report_node->field_default_category_order[$report_node->language][0]['safe_value'];
 
-  $report_info['data_color_thresholds'] = $report_node->field_data_color_range['und'];
+    $report_info['data_color_thresholds'] = $report_node->field_data_color_range[$report_node->language];
+
 
   //$report_info['base_class'] = isset($report_node->field_base_class[$lang][0]['safe_value']) ? $report_node->field_base_class[$lang][0]['safe_value'] : $report_node->field_base_class[$report_node->language][0]['safe_value'];
 

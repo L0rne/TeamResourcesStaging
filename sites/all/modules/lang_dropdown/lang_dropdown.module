@@ -448,9 +448,13 @@ function lang_dropdown_language_switch_links_alter(&$links, $type, $path) {
     return;
   }
 
+  var_dump($page_arguments);
+
+
+
   $translations_data = $page_arguments->translations->data;
 
-  var_dump($translations_data);
+
 
   foreach ($links as $langcode => $link) {
 

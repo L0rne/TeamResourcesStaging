@@ -232,6 +232,8 @@ function get_diagnostic_report() {
     $pdf_template_info = field_info_field("field_pdf_template");
     $pdf_template_lang = $pdf_template_info['translatable'] ? entity_language('node', $report_node) : LANGUAGE_NONE;
 
+    var_dump($pdf_template_lang);
+
     $template_filename = $report_node->field_pdf_template[$pdf_template_lang][0]['filename'];
 
   //var_dump($template_filename);
@@ -242,7 +244,7 @@ function get_diagnostic_report() {
 
   $pdf->merge_template($template_filename);
 
-  $pdf->print_pdf();
+  //$pdf->print_pdf();
 
   exit();
 

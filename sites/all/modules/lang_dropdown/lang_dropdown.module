@@ -448,10 +448,15 @@ function lang_dropdown_language_switch_links_alter(&$links, $type, $path) {
     return;
   }
 
-  dpm($page_arguments->translations, "translations");
-    dpm($page_arguments->translations->data, "translations data");
+  if (!isset($page_arguments->translations)) {
+      dpm("no translation");
+      return;
+  }
 
-
+    if (!isset($page_arguments->translations->data)) {
+        dpm("no translation data");
+        return;
+    }
 
 
   $translations_data = $page_arguments->translations->data;

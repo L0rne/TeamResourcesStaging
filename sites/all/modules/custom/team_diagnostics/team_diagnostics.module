@@ -232,7 +232,7 @@ function get_diagnostic_report() {
     $pdf_template_info = field_info_field("field_pdf_template");
     $pdf_template_lang = $pdf_template_info['translatable'] ? $language->language : LANGUAGE_NONE;
 
-    var_dump($pdf_template_info);
+    var_dump($pdf_template_lang);
 
     $template_filename = $report_node->field_pdf_template[$pdf_template_lang][0]['filename'];
 

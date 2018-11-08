@@ -245,15 +245,15 @@ function get_diagnostic_report() {
 
   $template_filename = $report_node->field_pdf_template[$lang][0]['filename'];
 
-  var_dump($template_filename);
+  //var_dump($template_filename);
 
   $pdf = new DiagnosticPDF($report_info);
 
-  //die(var_dump($pdf));
+  die(var_dump($pdf));
 
   $pdf->merge_template($template_filename);
 
-  $pdf->print_pdf();
+  //$pdf->print_pdf();
 
   exit();
 

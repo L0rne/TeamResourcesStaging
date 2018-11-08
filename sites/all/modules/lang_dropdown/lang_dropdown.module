@@ -454,12 +454,6 @@ function lang_dropdown_language_switch_links_alter(&$links, $type, $path) {
 
   $translations_data = $page_arguments->translations->data;
 
-  dpm($links, "links");
-
-  dpm($translations_data, "translation data");
-
-
-
   foreach ($links as $langcode => $link) {
 
     $translation_access  = FALSE;

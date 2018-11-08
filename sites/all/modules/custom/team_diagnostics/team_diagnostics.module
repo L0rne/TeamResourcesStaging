@@ -212,17 +212,17 @@ function get_diagnostic_report() {
 
   $report_info['css'] = $style;
 
-  $template_filename = $report_node->field_pdf_template[$report_node->language]['en']['filename'];
+  $template_filename = $report_node->field_pdf_template[$report_node->language]['en'][0]['filename'];
 
   // Switch template file if language is Spanish
   global $language;
-  if ($language->language == 'es' && $report_node->field_pdf_template[$report_node->language]['es']['filename']) {
+  if ($language->language == 'es' && $report_node->field_pdf_template[$report_node->language]['es'][0]['filename']) {
 
-    $template_filename = $report_node->field_pdf_template[$report_node->language]['es']['filename'];
+    $template_filename = $report_node->field_pdf_template[$report_node->language]['es'][0]['filename'];
 
   }
 
-  //var_dump($template_filename);
+  var_dump($template_filename);
 
   $pdf = new DiagnosticPDF($report_info);
 

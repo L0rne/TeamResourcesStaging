@@ -199,13 +199,13 @@ function get_diagnostic_report() {
 
   // Correctly set
     $base_class_info = field_info_field("field_base_class");
-    $base_class_lang = $base_class_info['translatable'] ? entity_language('node', $report_node) : LANGUAGE_NONE;
+    $base_class_lang = $base_class_info['translatable'] ? $language->language : LANGUAGE_NONE;
 
     $default_category_order_info = field_info_field("field_default_category_order");
-    $default_category_order_lang = $default_category_order_info['translatable'] ? entity_language('node', $report_node) : LANGUAGE_NONE;
+    $default_category_order_lang = $default_category_order_info['translatable'] ? $language->language : LANGUAGE_NONE;
 
     $data_color_range_info = field_info_field("field_data_color_range");
-    $data_color_range_lang = $data_color_range_info['translatable'] ? entity_language('node', $report_node) : LANGUAGE_NONE;
+    $data_color_range_lang = $data_color_range_info['translatable'] ? $language->language : LANGUAGE_NONE;
 
 
     //$report_info['base_class'] = $report_node->field_base_class[$report_node->language][0]['safe_value'];
@@ -232,7 +232,7 @@ function get_diagnostic_report() {
     $pdf_template_info = field_info_field("field_pdf_template");
     $pdf_template_lang = $pdf_template_info['translatable'] ? $language->language : LANGUAGE_NONE;
 
-    var_dump($pdf_template_lang);
+    //var_dump($pdf_template_lang);
 
     $template_filename = $report_node->field_pdf_template[$pdf_template_lang][0]['filename'];
 
@@ -244,7 +244,7 @@ function get_diagnostic_report() {
 
   $pdf->merge_template($template_filename);
 
-  //$pdf->print_pdf();
+  $pdf->print_pdf();
 
   exit();
 

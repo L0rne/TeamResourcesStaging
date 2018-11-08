@@ -192,47 +192,26 @@ function get_diagnostic_report() {
 
   $report_id = $report_info['report_id'];  
 
-  $report_node = node_load($report_id); // This is the report header node.
-
-  var_dump($report_node->field_base_class);
+  $report_node = node_load($report_id);
 
     //var_dump($report_node->field_base_class, "field_base_class");
-    //var_dump($report_node->default_category_order, "default_category_order");
-    //var_dump($report_node->data_color_thresholds, "data_color_thresholds"); // NULL
-
+    var_dump($report_node->default_category_order, "default_category_order");
+    var_dump($report_node->data_color_thresholds, "default_category_order");
 
 
   $report_info['line_item_id'] = $line_id;
 
-  //$report_info['base_class'] = $report_node->field_base_class[$lang][0]['safe_value'];
+  $report_info['base_class'] = $report_node->field_base_class['und'][0]['safe_value'];
 
-  //$report_info['default_category_order'] = $report_node->field_default_category_order[$lang][0]['safe_value'];
+  $report_info['default_category_order'] = $report_node->field_default_category_order['und'][0]['safe_value'];
 
-  //$report_info['data_color_thresholds'] = $report_node->field_data_color_range[$lang];
+  $report_info['data_color_thresholds'] = $report_node->field_data_color_range['und'];
 
-    if (isset($report_node->field_base_class[$lang][0]['safe_value'])) {
-        $report_info['base_class'] = $report_node->field_base_class[$lang][0]['safe_value'];
-    } elseif (isset($report_node->field_base_class[$report_node->language][0]['safe_value'])) {
-        $report_info['base_class'] = $report_node->field_base_class[$report_node->language][0]['safe_value'];
-    } else {
-        $report_info['base_class'] = $report_node->field_base_class['und'][0]['safe_value'];
-    }
+  //$report_info['base_class'] = isset($report_node->field_base_class[$lang][0]['safe_value']) ? $report_node->field_base_class[$lang][0]['safe_value'] : $report_node->field_base_class[$report_node->language][0]['safe_value'];
 
-    if (isset($report_node->field_default_category_order[$lang][0]['safe_value'])) {
-        $report_info['default_category_order'] = $report_node->field_default_category_order[$lang][0]['safe_value'];
-    } elseif (isset($report_node->field_default_category_order[$report_node->language][0]['safe_value'])) {
-        $report_info['default_category_order'] = $report_node->field_default_category_order[$report_node->language][0]['safe_value'];
-    } else {
-        $report_info['default_category_order'] = $report_node->field_default_category_order['und'][0]['safe_value'];
-    }
+  //$report_info['default_category_order'] = isset($report_node->field_default_category_order[$lang][0]['safe_value']) ? $report_node->field_default_category_order[$lang][0]['safe_value'] : $report_node->field_default_category_order[$report_node->language][0]['safe_value'];
 
-    if (isset($report_node->field_data_color_range[$lang][0]['safe_value'])) {
-        $report_info['data_color_thresholds'] = $report_node->field_data_color_range[$lang][0];
-    } elseif (isset($report_node->field_data_color_range[$report_node->language][0])) {
-        $report_info['data_color_thresholds'] = $report_node->field_data_color_range[$report_node->language][0];
-    } else {
-        $report_info['data_color_thresholds'] = $report_node->field_data_color_range['und'];
-    }
+  //$report_info['data_color_thresholds'] = isset($report_node->field_data_color_range[$lang]) ? $report_node->field_data_color_range[$lang] : $$report_node->field_data_color_range[$report_node->language];
 
 
   $report_css_file = drupal_get_path('module', 'team_diagnostics') . '/pdf.css';
@@ -245,7 +224,7 @@ function get_diagnostic_report() {
 
   $template_filename = $report_node->field_pdf_template[$lang][0]['filename'];
 
-  //var_dump($template_filename);
+  var_dump($template_filename);
 
   $pdf = new DiagnosticPDF($report_info);
 

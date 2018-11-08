@@ -194,9 +194,11 @@ function get_diagnostic_report() {
 
   $report_node = node_load($report_id);
 
+    var_dump($report_node);
+
     //var_dump($report_node->field_base_class, "field_base_class");
-    var_dump($report_node->default_category_order, "default_category_order");
-    var_dump($report_node->data_color_thresholds, "default_category_order");
+    //var_dump($report_node->default_category_order, "default_category_order");
+    //var_dump($report_node->data_color_thresholds, "default_category_order");
 
 
   $report_info['line_item_id'] = $line_id;

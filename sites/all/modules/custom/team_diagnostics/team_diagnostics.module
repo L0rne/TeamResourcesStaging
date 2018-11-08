@@ -197,24 +197,26 @@ function get_diagnostic_report() {
   $report_info['line_item_id'] = $line_id;
 
     $base_class_lang = field_get_items('node', $report_node, "field_base_class");
+    var_dump($base_class_lang);
     $default_category_order_lang = field_get_items('node', $report_node, "field_default_category_order");
+
     $color_range_lang = field_get_items('node', $report_node, "field_data_color_range");
 
 
     //$base_class_info = field_info_field("field_base_class");
     //$base_class_lang = $base_class_info['translatable'] ? entity_language('node', $report_node) : LANGUAGE_NONE;
 
-  $report_info['base_class'] = $report_node->field_base_class[$report_node->language][0]['safe_value'];
+  //$report_info['base_class'] = $report_node->field_base_class[$report_node->language][0]['safe_value'];
 
-  $report_info['default_category_order'] = $report_node->field_default_category_order[$report_node->language][0]['safe_value'];
+  //$report_info['default_category_order'] = $report_node->field_default_category_order[$report_node->language][0]['safe_value'];
 
-  $report_info['data_color_thresholds'] = $report_node->field_data_color_range[$report_node->language];
+  //$report_info['data_color_thresholds'] = $report_node->field_data_color_range[$report_node->language];
 
-//    $report_info['base_class'] = $report_node->field_base_class[$base_class_lang][0]['safe_value'];
-//
-//    $report_info['default_category_order'] = $report_node->field_default_category_order[$default_category_order_lang][0]['safe_value'];
-//
-//    $report_info['data_color_thresholds'] = $report_node->field_data_color_range[$color_range_lang];
+    $report_info['base_class'] = $report_node->field_base_class[$base_class_lang][0]['safe_value'];
+
+    $report_info['default_category_order'] = $report_node->field_default_category_order[$default_category_order_lang][0]['safe_value'];
+
+    $report_info['data_color_thresholds'] = $report_node->field_data_color_range[$color_range_lang];
 
 
   $report_css_file = drupal_get_path('module', 'team_diagnostics') . '/pdf.css';

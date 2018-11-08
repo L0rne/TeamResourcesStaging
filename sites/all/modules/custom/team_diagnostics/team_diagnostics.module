@@ -225,7 +225,7 @@ function get_diagnostic_report() {
 
   $report_info['css'] = $style;
 
-  $template_filename = $report_node->field_pdf_template[$lang][0]['filename'];
+  $template_filename = $report_node->field_pdf_template[$report_node->language][0]['filename'];
 
   var_dump($template_filename);
 

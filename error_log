@@ -188,3 +188,4 @@
 [27-Oct-2018 16:05:48 America/New_York] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ',' or ';' in /home/benchmark/public_html/modules/php/php.module(80) : eval()'d code on line 2
 [27-Oct-2018 16:06:24 America/New_York] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ',' or ';' in /home/benchmark/public_html/modules/php/php.module(80) : eval()'d code on line 2
 [27-Oct-2018 16:06:24 America/New_York] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ',' or ';' in /home/benchmark/public_html/modules/php/php.module(80) : eval()'d code on line 2
+[07-Nov-2018 20:58:21 America/New_York] PHP Fatal error:  Call to undefined function is_set() in /home/benchmark/public_html/sites/all/modules/custom/team_diagnostics/team_diagnostics.module on line 208

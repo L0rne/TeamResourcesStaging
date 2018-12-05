@@ -3418,9 +3418,7 @@ div.commerce-order-handler-area-order-total tr.component-type-commerce-price-for
 div.commerce-order-handler-area-order-total tr.component-type-commerce-price-formatted-amount {
   border: #666 thin solid;
 }
-form#commerce-checkout-form-review fieldset#edit-commerce-payment legend:after {
-  content: " Information";
-}
+
 div.checkout-complete p {
   margin: 20px 40px 5px 50px;
 }

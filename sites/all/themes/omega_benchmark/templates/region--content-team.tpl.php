@@ -7,9 +7,9 @@
     <div id="team-name-section" class="team-ui-section team-section-outer">
       <div id="team-name-info-icon" class="team-section-info-icon"></div>
       <div id="team-name-inner-section" class="team-section-inner">
-        <div class="field-label title-label">Team Name:&nbsp;</div>
+        <div class="field-label title-label"><?php print t('Team Name:'); ?>&nbsp;</div>
         <h1 class="title" id="page-title"><?php print $title; ?></h1>
-        <div class="team-title-description">(This team name will be visible on your report.)</div>
+        <div class="team-title-description"><?php print t('(This team name will be visible on your report.)'); ?></div>
       </div>
     </div>
     <?php if ($title_hidden): ?></div><?php endif; ?>

@@ -136,14 +136,11 @@ div#team-node-team-count-label {
     text-align: center;
 }
 
-div#team-email-distribution-list:before {
-	color: #666666;
-    content: "Current Distribution List:";
-    display: block;
+table#team-email-distribution-list th {
+    color: #666666;
     font-size: 13px;
     font-weight: 500;
-    margin: -8px 0 5px -4px;
-    padding: 0;
+    padding: 5px;
     text-transform: uppercase;
 }
 
@@ -507,10 +504,6 @@ div.diagnostic-details span.percent-complete {
 	color:#59A0CD;
 }
 
-div.diagnostic-details span.percent-complete:after {
-	content:" Complete";
-}
-
 div.diagnostic-details span.progress-text {
 	font-size:14px;
 	margin: 25px 0 0 15px;
@@ -780,13 +773,13 @@ div.download-link {
 
 }
 
-h1, h2, h3, h4, h5, h6, p, a, li, {
-	font-family:'Lato';
+h1, h2, h3, h4, h5, h6, p, a, li {
+    font-family: 'Lato','Trebuchet MS',Arial,Helvetica,sans-serif;
 }
 
 div.field-name-body div.field-label {
 	color: #000000;
-    font-family: 'Lato';
+    font-family: 'Lato','Trebuchet MS',Arial,Helvetica,sans-serif;
     font-size: 15px;
     font-weight: 500;
     letter-spacing: 0;

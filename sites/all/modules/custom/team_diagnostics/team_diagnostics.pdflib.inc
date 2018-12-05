@@ -32,8 +32,12 @@ define('TXP_PDFLIB_DEFAULT_FONT', 'cartogothicpro-book');
     private $last_textflow_header = array();
     
     function __construct($report_args = array(), $template_folder_uri = 'public://report_templates', /*$chart_image_folder_uri = 'public://pcharts', */ $outputfilename = '') {
-        $creator = isset($report_args['creator']) ? $report_args['creator'] : 'Team Benchmark';
-        $title = isset($report_args['create']) ? $report_args['create'] : 'Team Diagnostic';
+
+        $benchmark_text = t('Team Benchmark');
+        $diagnostic_text = t('Team Diagnostic');
+
+        $creator = isset($report_args['creator']) ? $report_args['creator'] : $benchmark_text;
+        $title = isset($report_args['create']) ? $report_args['create'] : $diagnostic_text;
         
         //TODO: Set all the margin properties from CSS based on "body", ".page", "{base_class}" selectors.
         $this->page_properties['margin_llx'] = 50; // = isset($report_args['margin_top'])
@@ -98,8 +102,10 @@ define('TXP_PDFLIB_DEFAULT_FONT', 'cartogothicpro-book');
         catch (Exception $e) {
             die($e);
         }
+
+
     }
-    
+
     function __destruct() {
         if ($this->pdf_lib != 0) {
             try {
@@ -109,17 +115,17 @@ define('TXP_PDFLIB_DEFAULT_FONT', 'cartogothicpro-book');
                 $err_msg = "PDFlib exception occurred in DiagnosticPDF destructor:\n" .
                     "[" . $e->get_errnum() . "] " . $e->get_apiname() . ": " .
                     $e->get_errmsg() . "\n";
-                
+
                 drupal_set_message($err_msg, 'error', FALSE);
             }
             catch (Exception $e) {
                 die($e);
             }
-            
+
             $this->pdf_lib = 0;
         }
     }
-    
+
     /**
      *  $page is the page number of the template used to create this report,
      *  NOT the page number of the report itself. Here and elsewhere in the
@@ -130,45 +136,46 @@ define('TXP_PDFLIB_DEFAULT_FONT', 'cartogothicpro-book');
     function merge_template($template_filename) {
         //dpm($template_filename, "template_filename");
         try {
-            
+
             $pdi_doc = $this->pdf_lib->open_pdi_document($template_filename, "");
+
             if ($pdi_doc == 0) {
                 //set_drupal_message("Error: " . $this->pdf_lib->get_errmsg(), 'error', FALSE);
                 //continue;
                 die('Error: ' . $this->pdf_lib->get_errmsg());
             }
-            
+
             $this->doc_blocks = $this->get_blocks($pdi_doc); // loads template blocks
             //die(var_dump($doc_blocks));
-    
+
             $endpage = $this->pdf_lib->pcos_get_number($pdi_doc, "length:pages"); // gets last page of template
-    
+
             /* Loop over all pages of the input document */
             for ($pageno = 1; $pageno <= $endpage; $pageno++) {
 
                 // obnoxiously, the "page" parameter for open_pdi_page() is not zero-based.
                 $page = $this->pdf_lib->open_pdi_page($pdi_doc, $pageno, "cloneboxes"); // opens a specific template page
                 $this->page_closed = false;
-    
+
                 if ($page == 0) {
                     set_drupal_message("Error: " . $this->pdf_lib->get_errmsg(), 'error', FALSE);
                     continue;
                 }
-                
+
                 /* Dummy $page size; will be adjusted later */
                 $this->pdf_lib->begin_page_ext(10, 10, "");
                 // Place the imported $page on the output $page, and adjust the $page size
                 $this->pdf_lib->fit_pdi_page($page, 0, 0, "cloneboxes"); // "adjustpage");
-                
+
                 $page_blocks = $this->doc_blocks[$pageno]; // get blocks on this page of the template
                 foreach ($page_blocks as $delta => $block) {
                     $this->fill_block($page, $block);
                 }
-                
+
                 $this->pdf_lib->close_pdi_page($page);
-                
+
                 if(!$this->page_closed) { // is this necessary, given the line above?
-                    
+
                     $this->do_repeated_blocks();
                     $this->pdf_lib->end_page_ext("");
                     $this->page_num++;
@@ -177,22 +184,22 @@ define('TXP_PDFLIB_DEFAULT_FONT', 'cartogothicpro-book');
                     die(var_dump($page));
                 }
             }
-            
+
             $this->pdf_lib->close_pdi_document($pdi_doc);
-        
+
         }catch (PDFlibException $e) {
             $err_msg = "PDFlib exception occurred in DiagnosticPDF->merge_template():\n" .
                 "[" . $e->get_errnum() . "] " . $e->get_apiname() . ": " .
                 $e->get_errmsg() . "\n";
-            
+
             drupal_set_message($err_msg, 'error', FALSE);
         }
         catch (Exception $e) {
             die($e);
         }
     }
-    
-    
+
+
     /**
      *  Helper function to create a user-friendlier array of blocks
      *  In addition to the PDFLib block properties...
@@ -201,21 +208,27 @@ define('TXP_PDFLIB_DEFAULT_FONT', 'cartogothicpro-book');
      */
     private function get_blocks($pdi_doc) {
         $blocks = array();
-        
+
         $page_count = $this->pdf_lib->pcos_get_number($pdi_doc, "length:pages");
-        
+
         if ($page_count < 1) {
             return $blocks;
         }
-        
+
         /* Loop over all pages of the input document */
         for ($page_index = 0; $page_index < $page_count; $page_index++) {
-            
+
             $page_number = $page_index + 1;
-            
+
             $block_count = $this->pdf_lib->pcos_get_number($pdi_doc, 'length:pages['. $page_index .']/PieceInfo/PDFlib/Private/Blocks');
+            //$block_count = $this->pdf_lib->pcos_get_number($pdi_doc, 'length:pages['. $page_index .']/blocks');
+
+            //die($block_count);
+
             //if ($block_count == 0) continue;
-            
+
+            //die('Error: ' . $this->pdf_lib->get_errmsg());
+
             $blocks[$page_number] = array();
             for ($block_index = 0; $block_index < $block_count; $block_index++) {
                 $block = array();
@@ -223,30 +236,30 @@ define('TXP_PDFLIB_DEFAULT_FONT', 'cartogothicpro-book');
                 $block['name'] = $block['id'] = $this->pdf_lib->pcos_get_string($pdi_doc,
                     'pages[' . $page_index . ']/PieceInfo/PDFlib/Private/Blocks[' . $block_index . ']/Name');
                 $block['css_id'] = '#' . preg_replace('/_/', '-', $block['id']);
-                
+
                 // get block PDI type
                 $block['pdi_type'] = $this->pdf_lib->pcos_get_string($pdi_doc,
                     'pages[' . $page_index . ']/PieceInfo/PDFlib/Private/Blocks[' . $block_index . ']/Subtype');
-                
+
                 $is_textflow = $this->pdf_lib->pcos_get_string($pdi_doc, 'type:pages['. $page_index .']/blocks/'. $block['name'] .'/textflow') == 'boolean';
                 if ($is_textflow) {
                     $block['pdi_type'] = 'textflow';
                 }
-                
-                
+
+
                 //if (stristr($block['pdi_type'], 'Text')) {
                 //    // get font information
-                //    $block['font_name'] = $this->pdf_lib->pcos_get_string($pdi_doc, 'pages['. $page_index .']/blocks/'. $block['name'] . '/fontname'); 
-                //    $block['font_size'] = $this->pdf_lib->pcos_get_number($pdi_doc, 'pages['. $page_index .']/blocks/'. $block['name'] . '/fontsize'); 
-                //    
+                //    $block['font_name'] = $this->pdf_lib->pcos_get_string($pdi_doc, 'pages['. $page_index .']/blocks/'. $block['name'] . '/fontname');
+                //    $block['font_size'] = $this->pdf_lib->pcos_get_number($pdi_doc, 'pages['. $page_index .']/blocks/'. $block['name'] . '/fontsize');
+                //
                 //    // get default content TODO: implement this globally
                 //    if ($block['name'] == 'table_0_paragraph' )
-                //        $block['default_text'] = $this->pdf_lib->pcos_get_string($pdi_doc, 'pages['. $page_index .']/blocks/'. $block['name'] . '/defaulttext'); 
+                //        $block['default_text'] = $this->pdf_lib->pcos_get_string($pdi_doc, 'pages['. $page_index .']/blocks/'. $block['name'] . '/defaulttext');
                 //
                 //}
                 $block = $this->append_block_css($block);
-                
-                
+
+
                 // get block coordinates
                 // $llx = $block['coords'][0]; $lly = $block['coords'][1]; $urx = $block['coords'][2]; $ury = $block['coords'][3];
                 $coords = array();
@@ -259,23 +272,23 @@ define('TXP_PDFLIB_DEFAULT_FONT', 'cartogothicpro-book');
                 $y1 = $block['coords'][1];
                 $x2 = $block['coords'][2];
                 $y2 = $block['coords'][3];
-                
+
                 $block['width'] = abs($x2 - $x1);
                 $block['height'] = abs($y2 - $y1);
-                
+
                 // get custom properties
                 $custom_count = $this->pdf_lib->pcos_get_number($pdi_doc,
                     'length:pages[' . $page_index . ']/blocks[' . $block_index . ']/Custom');
                 for ($custom_index = 0; $custom_index < $custom_count; $custom_index++) {
                     $key = $this->pdf_lib->pcos_get_string($pdi_doc,
                         'pages[' . $page_index . ']/PieceInfo/PDFlib/Private/Blocks[' . $block_index . ']/Custom[' . $custom_index . '].key');
-                    
+
                     $block[$key] = $this->pdf_lib->pcos_get_string($pdi_doc,
                         'pages[' . $page_index . ']/PieceInfo/PDFlib/Private/Blocks[' . $block_index . ']/Custom[' . $custom_index . '].val');
                 }
-                
+
                 if (isset($block['textflow_columns'])) $block['textflow_columns'] = explode(',', $block['textflow_columns']);
-                
+
                 // enforce "repeated" property
                 if (!isset($block['repeated'])) {
                     $block['repeated'] = FALSE;
@@ -286,16 +299,18 @@ define('TXP_PDFLIB_DEFAULT_FONT', 'cartogothicpro-book');
                         $block['repeated'] = TRUE;
                     }
                 }
-                
+
                 $blocks[$page_number][$block['name']] = $block;
-            
+
             } // block loop
-            
+
         } // end page loop
-        
+
+        //die(var_dump($blocks));
+
         //$this->doc_blocks = $blocks;
         return $blocks;
-        //die(var_dump($blocks));
+
     }
     
     private function append_block_css($block) {

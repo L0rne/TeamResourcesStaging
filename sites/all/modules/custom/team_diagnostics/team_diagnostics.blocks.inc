@@ -61,32 +61,32 @@ function team_diagnostics_block_view($delta = '') {
   
   switch($delta) {
     case 'available_diagnostics':
-      $block['subject'] = 'Available Diagnostics';
+      $block['subject'] = t('Available Diagnostics');
       $block['content'] = drupal_get_form('available_diagnostics_form');
       break;
     
     case 'survey_status':
-      $block['subject'] = 'Survey Status';
+      $block['subject'] = t('Survey Status');
       $block['content'] = _team_get_responses($nid); // 'Not quite done yet...';
       break;
     
     case 'send_email_to_team':
-      $block['subject'] = 'Email Team';
+      $block['subject'] = t('Send Survey Invitation or Reminder');
       $block['content'] = drupal_get_form('send_email_form');
       break;
     
     case 'download_diagnostic_reports':
-      $block['subject'] = 'Download Reports';
+      $block['subject'] = t('Download Reports');
       $block['content'] = _get_report_links($nid);
       break;
     
     case 'distribution_list':
-      $block['subject'] = 'Team Members';
+      $block['subject'] = t('Team Distribution List');
       $block['content'] = drupal_get_form('add_team_email_form', $node); // _get_team_distribution($nid);
       break;
     
     case 'diagnostic_dashboard':
-      $block['subject'] = 'Diagnostic Dashboard';
+      $block['subject'] = t('Diagnostic Dashboard');
       $block['content'] = drupal_get_form('diagnostic_dashboard_form');
       break;
   }
@@ -261,11 +261,17 @@ function send_team_email($to, $from, $subject, $admin_message, $msg_params) {
 }
 
 function team_diagnostics_get_team_invite_boilerplate() {
-  $bp_path = explode('/', drupal_get_normal_path('internal/team-invite-boilerplate'));
-  $bp_id = $bp_path[1];
+
+    global $language;
+    $user_lang = $language->language;
+
+//  $bp_path = explode('/', drupal_get_normal_path('internal/team-invite-boilerplate'));
+//  $bp_id = $bp_path[1];
+    // The above doesn't work right for translation switching, so I'm hard-coding the node id.
+    $bp_id = 144;
   $bp_node = node_load($bp_id);
-  
-  return $bp_node->body[$bp_node->language][0]['value'];
+
+  return $bp_node->body[$user_lang][0]['value'];
 }
 
 function available_count_message() {
@@ -310,20 +316,23 @@ function get_dashboard_form_items($nid) {
   
   $purchase_more_link = l('Purchase Additional Diagnostics', 'diagnostic-products');
   //TODO: Info Header Item
-  
+
+    $unused_diagnostics_label = t('Unused Diagnostics:');
+    $completed_diagnostics_label = t('Completed Diagnostics:');
+    $purchase_another_diagnostics_label = t('Purchase another diagnostic');
    
   $info_markup =  "<div id='info-header-text'>" .
                   "    <div id='info-header-unused-diagnostics'>" .
-                  "        <span id='info-unused-text'>Unused&nbsp;Diagnostics:</span>&nbsp;" .
+                  "        <span id='info-unused-text'>{$unused_diagnostics_label}</span>&nbsp;" .
                   "        <span id='info-unused-count'>$unused</span>" .
                   "    </div>" .
                   "    <div>" .
-                  "        <span id='info-completed-text'>Completed&nbsp;Diagnostics:</span>&nbsp;" .
+                  "        <span id='info-completed-text'>{$completed_diagnostics_label}</span>&nbsp;" .
                   "        <span id='info-completed-count'>$completed</span>" .
                   "    </div>" .
                   "</div>" .
                   "<div id='info-header-purchase'>" .
-                  "    <a id='info-header-purchase-link' href='/diagnostic-products' title='Purchase another diagnostic'>&nbsp;</a>" .
+                  "    <a id='info-header-purchase-link' href='/diagnostic-products' title='" .  $purchase_another_diagnostics_label . "'>&nbsp;</a>" .
                   "</div>";
   $form['info_header'] = array(
     '#prefix' => '<div id="dashboard-info-header" class="ui-helper-reset ui-widget-content ui-corner-all">',
@@ -342,21 +351,26 @@ function get_dashboard_form_items($nid) {
     //'#weight' => -1,
   );
   */
-  
+
+    $directions_label = t('Directions');
+    $directions_page_link_title = t('View Directions Page.');
+
   $form['directions'] = array(
-    '#prefix' => '<div id="dashboard-inner"><h3 id="directions-header" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all"><span class="ui-icon"></span><a class="colorbox-node" href="/directions?width=960&height=500">Directions</a></h3><div id="diagnostic-directions" class="ui-helper-reset ui-widget-content ui-corner-all">',
+    '#prefix' => '<div id="dashboard-inner"><h3 id="directions-header" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all"><span class="ui-icon"></span><a class="colorbox-node" href="/directions?width=960&height=500">' . $directions_label . '</a></h3><div id="diagnostic-directions" class="ui-helper-reset ui-widget-content ui-corner-all">',
 	/*'#prefix' => '<div id="dashboard-inner">/*<h3 id="directions-header" class="team-sidebar-header-thingy ui-accordion-header ui-helper-reset ui-state-default ui-corner-all"><span class="ui-icon"></span><a class="colorbox-node" href="/directions?width=960&height=500">Directions</a></h3><div id="diagnostic-directions" class="ui-helper-reset ui-widget-content ui-corner-all">',*/
     '#suffix' => '</div>',
-    '#markup' => '<a class="colorbox-node" href="/directions?width=960&height=500">View Directions Page.</a>',
+    '#markup' => '<a class="colorbox-node" href="/directions?width=960&height=500">' . $directions_page_link_title . '</a>',
   );
   
   $form['dashboard'] = array(
     '#prefix' => '<div id="dashboard-accordion">',
     '#suffix' => '</div></div>',
   );
+
+  $instructions_header = t('Viewing Your Report');
+  $instructions = t('When your team has completed 75% or more of the survey, the report PDF will become available to view. A "View Report" button will appear below, on top of the the progress chart.');
   
-  
-  $instructions = '<h5>Viewing Your Report</h5><p>When your team has completed 75% or more of the survey, the report PDF will become available to view. A "View Report" button will appear below, on top of the the progress chart.</p>';
+  $instructions = '<h5>' . $instructions_header . '</h5><p>' . $instructions . '</p>';
   
   foreach($diagnostic_info['applied_info'] as $delta => $applied_diagnostic) {
 
@@ -705,7 +719,7 @@ function add_team_email_form($form_state, $node) {
 
 function get_team_distribution_widget($nodeid, $team_email_list) {
   
-  //$headers = array('Email', 'Remove');
+  $headers = array('Email', 'Remove');
   $rows = array();
   
   foreach($team_email_list as $delta => $email_object) {
@@ -730,6 +744,7 @@ function get_team_distribution_widget($nodeid, $team_email_list) {
   }
   
   $header = array(); //(t('Team Member Email'), t('X'));
+    $header = array(t('CURRENT DISTRIBUTION LIST:'), ' ');
   
   $tablevars = array(
     'header' => $header,

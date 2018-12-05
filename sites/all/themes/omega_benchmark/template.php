@@ -26,13 +26,13 @@ function omega_benchmark_theme($existing, $type, $theme, $path) {
         ),
     );
     
-    $items['user_register_form'] = array( //user_register_form
+    $items['user_register_form'] =array( //user_register_form
         'render element' => 'form',
         'path' => drupal_get_path('theme', 'omega_benchmark') . '/templates',
         'template' => 'user-register',
         'preprocess functions' => array(
             'omega_benchmark_preprocess_user_register'
-        ),
+        ),f
     );
     return $items;
 }
@@ -145,7 +145,9 @@ function omega_benchmark_preprocess_field(&$variables, $hook) {
   $nid = $variables['element']['#object']->nid;
   switch ($field_name) {
     case 'body':
-      $variables['classes_array'][] = 'team-description-field';
+      // make field label translatable
+        $variables['label'] = t($variables['label']);
+        $variables['classes_array'][] = 'team-description-field';
       $body = $variables['items'][0]['#markup'];
       $variables['items'][0]['#markup'] = '<div id="team-node-body-' . $nid . '"  class="team-node-body jeditable-textarea">' . $body . '</div>';
       break;
@@ -248,7 +250,7 @@ function omega_benchmark_add_continue_shopping_link(&$form, $weight = 100) {
   $form['continue-shopping'] = array(
     '#prefix' => '<div class="continue-shopping">',
     '#suffix' => '</div>',
-    '#markup' => l('Continue Shopping', 'benchmark-diagnostics', $options),
+    '#markup' => l(t('Continue Shopping'), 'benchmark-diagnostics', $options),
     '#weight' => $weight,
   );
   
@@ -314,7 +316,7 @@ function omega_benchmark_validate_commerce_checkout_form_checkout(&$form, &$form
 }
 
 function omega_benchmark_form_commerce_checkout_form_review_alter(&$form, &$form_state, $form_id) {
-  $form['buttons']['back']['#value'] = 'Edit Account Information';
+  $form['buttons']['back']['#value'] = t('Edit Account Information');
   $form['buttons']['back']['#prefix'] = '';
   omega_benchmark_add_continue_shopping_link($form);
   return;

@@ -1100,4 +1100,10 @@ function team_diagnostics_menu_alter(&$items) {
   //$items['node/add/team']['page arguments'] = array('node/1'); 
   $items['node/add/team']['access callback'] = FALSE;
 }
- 
+
+/** * Implements hook_form_alter(). */
+function team_diagnostics_form_alter(&$form, &$form_state, $form_id) {
+
+    //dpm($form['buttons']['continue']['#suffix'], "form " . $form_id);
+
+}

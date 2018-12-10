@@ -287,9 +287,13 @@ function omega_benchmark_form_views_form_commerce_cart_form_default_alter(&$form
 }
 
 function omega_benchmark_form_commerce_checkout_form_checkout_alter(&$form, &$form_state, $form_id) {
-  $form['buttons']['cancel']['#value'] = 'Edit Cart';
+
+    $cancel_label   = t('Edit Cart');
+    $continue_label = t('Review order & pay');
+
+  $form['buttons']['cancel']['#value'] = $cancel_label;
   $form['buttons']['cancel']['#prefix'] = '';
-  $form['buttons']['continue']['#value'] = 'Review order & pay';
+  $form['buttons']['continue']['#value'] = $continue_label;
   $form['buttons']['continue']['#validate'][] = 'omega_benchmark_validate_commerce_checkout_form_checkout';
   
   global $user;

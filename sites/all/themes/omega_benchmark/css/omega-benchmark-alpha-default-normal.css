@@ -1219,6 +1219,11 @@ ul.thing-one li.diagnostics-row div.product-image a:hover:after {
   text-transform: uppercase;
   width: 115px;
 }
+
+.i18n-es ul.thing-one li.diagnostics-row div.product-image a:hover:after {
+  content: "Ver ejemplos de informes";
+}
+
 div.divider hr {
   clear: both;
   background: none repeat scroll 0 0 transparent;

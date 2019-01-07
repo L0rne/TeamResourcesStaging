@@ -483,7 +483,20 @@ function team_diagnostics_create_team_nodes_from_line_items($commerce_order) {
 
   $order = _benchmark_team_pricing_get_line_items_with_fields($order_id);
 
-  
+
+  $current_date = date('F-d-Y');
+
+    global $language;
+    $user_lang = $language->language;
+
+    if ($user_lang == "es") {
+        setlocale(LC_ALL,"es_ES");
+        $current_date = strftime("%B-%d-%G",time());
+    }
+
+
+
+
 
   // group by team name
 
@@ -493,7 +506,7 @@ function team_diagnostics_create_team_nodes_from_line_items($commerce_order) {
 
     $new_teams[$line_item->field_team_name_value]['uid'] = $uid;
 
-    $new_teams[$line_item->field_team_name_value]['team_name'] = $organization . ' - ' . $line_item->field_team_name_value . ' - ' . date('F-d-Y');
+    $new_teams[$line_item->field_team_name_value]['team_name'] = $organization . ' - ' . $line_item->field_team_name_value . ' - ' . $current_date;
 
     $new_teams[$line_item->field_team_name_value]['size'] = $line_item->field_team_size_value;
 

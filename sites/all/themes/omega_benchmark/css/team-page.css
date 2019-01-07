@@ -504,6 +504,10 @@ div.diagnostic-details span.percent-complete {
 	color:#59A0CD;
 }
 
+div.diagnostic-details span.percent-complete:after {
+	content:" Complete";
+}
+
 div.diagnostic-details span.progress-text {
 	font-size:14px;
 	margin: 25px 0 0 15px;
@@ -1161,6 +1165,15 @@ div#team-name-info-icon:hover:after {
 	width:200px;
 }
 
+.i18n-es div#team-name-info-icon:hover:after {
+    content:" Haga clic en Editar y personalice el nombre de su equipo.";
+    padding:0 22px 5px 16px;
+    display:block;
+    margin-left:-2px;
+    margin-top:-13px;
+    width:200px;
+}
+
 div#team-description-info-icon:hover:after {
 	content:"Click Edit and provide a brief team description.";
 	padding:0 22px 5px 16px;
@@ -1169,6 +1182,13 @@ div#team-description-info-icon:hover:after {
 	margin-top:-12px;
 }
 
+.i18n-es div#team-description-info-icon:hover:after {
+    content:"Haga clic en Editar y proporcione una breve descripción del equipo.";
+    padding:0 22px 5px 16px;
+    display:block;
+    margin-left:-2px;
+    margin-top:-12px;
+}
 div#team-distribution-info-icon:hover:after {
 	content:"Add your team's email addresses to the white field. When you are finished, click on the button below to finish adding team members.";
 	padding:0 22px 5px 16px;
@@ -1177,12 +1197,28 @@ div#team-distribution-info-icon:hover:after {
 	margin-top:-12px;
 }
 
+.i18n-es div#team-distribution-info-icon:hover:after {
+    content:"Agregue las direcciones de correo electrónico de su equipo al campo blanco. Cuando haya terminado, haga clic en el botón de abajo para terminar de agregar miembros del equipo.";
+    padding:0 22px 5px 16px;
+    display:block;
+    margin-left:-2px;
+    margin-top:-12px;
+}
+
 div#team-send-mail-info-icon:hover:after {
 	content:"Add an optional greeting to the diagnostic invitation shown in this step, then select the Send button to begin your survey.";
 	padding:0 32px 0px 22px;
 	display:block;
 	margin-left:-2px;
 	margin-top:-12px;
+}
+
+.i18n-es div#team-send-mail-info-icon:hover:after {
+    content:"Agregue un saludo opcional a la invitación de diagnóstico que se muestra en este paso, luego seleccione el botón Enviar para comenzar su encuesta.";
+    padding:0 32px 0px 22px;
+    display:block;
+    margin-left:-2px;
+    margin-top:-12px;
 }
 
 div#dashboard-info-icon.team-section-info-icon {
@@ -1202,6 +1238,16 @@ div#dashboard-info-icon.team-section-info-icon:hover {
 
 div#dashboard-info-icon.team-section-info-icon:hover:after {
 	content: "Your diagnostic report will become available when 75% of your team has completed the corresponding survey.";
+    display: block;
+    line-height: 15px;
+    margin-left: 21px;
+    margin-top: -25px;
+    padding: 0 0 5px 16px;
+    width: 253px;
+}
+
+.i18n-es div#dashboard-info-icon.team-section-info-icon:hover:after {
+    content: "Su informe de diagnóstico estará disponible cuando el 75% de su equipo haya completado la encuesta correspondiente.";
     display: block;
     line-height: 15px;
     margin-left: 21px;

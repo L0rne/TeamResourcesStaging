@@ -211,7 +211,11 @@ function send_email_form_submit($form, &$form_state) {
     }
     
   }
-  $message_sent_text = $msg_count == 1 ? '1 Message' : $msg_count . ' Messages';
+
+  $message = t('1 Message');
+  $messages = t(' Messages')
+
+  $message_sent_text = $msg_count == 1 ? $message : $msg_count . $messages;
   $output = "<h3>$message_sent_text Sent!</h3>" . $output;
   $message_clarification = t('If you have more than one diagnostic applied to this team, a separate email was sent to each member for each diagnostic.');
   $output .= "<br>($message_clarification)";

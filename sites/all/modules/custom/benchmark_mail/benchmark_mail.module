@@ -17,7 +17,7 @@ function benchmark_mail_mail($key, &$message, $params) {
       $message['headers']['Content-Type'] = 'text/html; charset=UTF-8;';
       // $message['subject'] = $params['subject'];
       // $message['subject'] = "Request to join a Team Benchmark Survey";
-      $message['subject'] = "Invitation to your Team Resources Survey";
+      $message['subject'] = t("Invitation to your Team Resources Survey");
       $message['body'][] = $params['body'];
       break;
   }

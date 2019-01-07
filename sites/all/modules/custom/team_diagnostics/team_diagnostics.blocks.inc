@@ -174,6 +174,11 @@ function send_email_form_submit($form, &$form_state) {
 
   global $user;
   global $base_url;
+  global $language;
+  $user_lang = $language->language;
+  $language_default = language_default();
+
+
   
   $from = $user->mail;
   $msg = $form_state['values']['email_team']['email_message'];
@@ -197,7 +202,12 @@ function send_email_form_submit($form, &$form_state) {
     $line_item_id = $send_this->diagnostic_line_item_id_value;
     
     // build survey link
-    $link = $base_url . '/team-diagnostic/survey/' . $nid . '/' . $line_item_id . '/' . $to;
+      $lang_str = "";
+      if ($user_lang != $language_default->language) {
+          $lang_str = "/{$user_lang}";
+      }
+      $survey_link = $lang_str . '/team-diagnostic/survey/' . $nid . '/' . $line_item_id . '/' . $to;
+    $link = $base_url . $survey_link;
     $msg_params['link'] = $link;
     $msg_params['diagnostic_name'] = $diagnostic_items[$line_item_id];
     if (!send_team_email($to, $from, $subject, $msg, $msg_params)) {
@@ -211,8 +221,13 @@ function send_email_form_submit($form, &$form_state) {
     }
     
   }
-  $message_sent_text = $msg_count == 1 ? '1 Message' : $msg_count . ' Messages';
-  $output = "<h3>$message_sent_text Sent!</h3>" . $output;
+
+    $message = t('1 Message');
+    $messages = t(' Messages');
+    $sent = t('Sent!');
+
+  $message_sent_text = $msg_count == 1 ? $message : $msg_count . $messages;
+  $output = "<h3>$message_sent_text $sent</h3>" . $output;
   $message_clarification = t('If you have more than one diagnostic applied to this team, a separate email was sent to each member for each diagnostic.');
   $output .= "<br>($message_clarification)";
   drupal_set_message($output, $msg_type); // t("Email messages sent. Instructions and links were appended to your message.")); //
@@ -236,10 +251,12 @@ function ajax_send_team_email_callback($form, $form_state){
 function send_team_email($to, $from, $subject, $admin_message, $msg_params) {
   $module = 'benchmark_mail';
   $key = 'html_mail';
-  $language = language_default();
+  //$language_default = language_default();
   $params = array();
   $from = NULL;
   $send = TRUE;
+
+    global $language;
   
   $boilerplate = team_diagnostics_get_team_invite_boilerplate();
   $boilerplate = preg_replace('/\[survey link\]/i', $msg_params['link'], $boilerplate);
@@ -393,13 +410,14 @@ function get_dashboard_form_items($nid) {
       $percent = ceil(($members_complete / $member_count) * 100);
     }
     
-    $download = $percent > 10; //74;
-    $percent .= '%';
+    $download      = $percent > 10; //74;
+    $percent      .= '%';
+    $details_label = t('Diagnostic Details');
     
     $form['dashboard'][$item_id]['details'] = array(
       '#prefix' => '<div class="diagnostic-details">',
       '#suffix' => '</div>',
-      '#markup' => "<h5>Diagnostic Details</h5><span class='progress-text'>Progress:</span>&nbsp;<span class='percent-complete'>$percent</span>",
+      '#markup' => "<h5>{$details_label}</h5><span class='progress-text'>Progress:</span>&nbsp;<span class='percent-complete'>$percent</span>",
     );
     
     $form['dashboard'][$item_id]['chart_download'] = array(

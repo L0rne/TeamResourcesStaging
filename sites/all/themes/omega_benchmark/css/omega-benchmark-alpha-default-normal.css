@@ -2078,6 +2078,41 @@ div#admin-menu.panel-pane div.pane-content ul.menu li.account-management a:after
 div#admin-menu.panel-pane div.pane-content ul.menu li.account-management a:hover {
   background-position: 0px 0px;
 }
+
+div#admin-menu.panel-pane div.pane-content ul.menu li.administraci-n-de-cuenta a {
+  background: url("../images/AccountManagementButton.png") no-repeat scroll 0 -70px transparent;
+  border-radius: 5px 5px 5px 5px;
+  color: #FFFFFF;
+  display: block;
+  font-family: 'Lato';
+  font-size: 16px;
+  height: 40px;
+  line-height: 17px;
+  margin: 5px;
+  padding: 28px 0 0 30px;
+  text-align: left;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  width: 320px;
+}
+div#admin-menu.panel-pane div.pane-content ul.menu li.administraci-n-de-cuenta a:after {
+  color: #FFFFFF;
+  content: "Change your email address or password";
+  display: block;
+  font-family: 'Lato';
+  font-size: 0.7em;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin: -3px 0 0 2px;
+  text-align: left;
+  text-transform: none;
+}
+div#admin-menu.panel-pane div.pane-content ul.menu li.administraci-n-de-cuenta a:hover {
+  background-position: 0px 0px;
+}
+
 div#admin-menu.panel-pane div.pane-content ul.menu li.order-history a {
   background: url(../images/OrderHistoryButton.png) no-repeat 0px -70px transparent;
   border-radius: 5px 5px 5px 5px;
@@ -2111,6 +2146,41 @@ div#admin-menu.panel-pane div.pane-content ul.menu li.order-history a:after {
 div#admin-menu.panel-pane div.pane-content ul.menu li.order-history a:hover {
   background-position: 0px 0px;
 }
+
+div#admin-menu.panel-pane div.pane-content ul.menu li.historial-de-pedidos a {
+  background: url(../images/OrderHistoryButton.png) no-repeat 0px -70px transparent;
+  border-radius: 5px 5px 5px 5px;
+  color: #FFFFFF;
+  display: block;
+  font-family: 'Lato';
+  font-size: 16px;
+  height: 40px;
+  line-height: 17px;
+  margin: 5px;
+  padding: 28px 0 0 30px;
+  text-align: left;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  width: 320px;
+}
+div#admin-menu.panel-pane div.pane-content ul.menu li.historial-de-pedidos a:after {
+  color: #FFFFFF;
+  content: "Ver e imprimir pedidos y recibos anteriores";
+  display: block;
+  font-family: 'Lato';
+  font-size: 0.7em;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin: -3px 0 0 2px;
+  text-align: left;
+  text-transform: none;
+}
+div#admin-menu.panel-pane div.pane-content ul.menu li.historial-de-pedidos a:hover {
+  background-position: 0px 0px;
+}
+
 div#admin-team-list.panel-pane h2.pane-title {
   border-bottom: rgba(180, 181, 168, 0.6) dotted thin;
   color: #304753;
@@ -4447,4 +4517,10 @@ section.triaxia-product p.footer-copyright {
 }
 .TestClass {
   background: #DDDDDD;
+}
+
+.pager li.pager-first a, .pager li.pager-previous a, .pager li.pager-next a, .pager li.pager-last a {
+  width: auto;
+  text-align: center;
+  padding: 4px;
 }
